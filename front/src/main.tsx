@@ -1,10 +1,27 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+import * as React from 'react'
+import {ChakraProvider, extendTheme} from '@chakra-ui/react'
+import * as ReactDOM from 'react-dom/client'
 import App from "./App.tsx";
 import "./index.css";
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-);
+const colors = {
+    blue: {
+        light: "#97CAD3",
+        main: "#13869A",
+    },
+    white: "#FFFFFF",
+    alert: "#F74C48",
+    black: "#000000"
+}
+
+
+const theme = extendTheme({ colors })
+
+const rootElement = document.getElementById('root')
+ReactDOM.createRoot(rootElement).render(
+    <React.StrictMode>
+        <ChakraProvider theme={theme}>
+            <App />
+        </ChakraProvider>
+    </React.StrictMode>,
+)
