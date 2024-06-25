@@ -12,12 +12,14 @@
    source ./venv/bin/activate
    ```
 
-4. Installer les dépendances :
+4. Installer PyTorch : https://pytorch.org/get-started/locally/
+
+5. Installer les dépendances :
    ```shell
    pip install -r requirements.txt
    ```
 
-5. Lancer le projet :
+6. Lancer le projet :
    ```shell
    fastapi dev main.py
    ```
