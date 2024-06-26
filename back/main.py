@@ -1,9 +1,19 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from langserve import add_routes
 from pydantic import BaseModel
 
-from src.generate_summary import generate_summary
+from src.chain import create_chain
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get("/")
@@ -15,7 +25,4 @@ class InputRequest(BaseModel):
     input: str
 
 
-@app.post("/summarize")
-def read_item(input_request: InputRequest):
-    output = generate_summary(input_request.input)
-    return {"input": input_request.input, "output": output}
+add_routes(app, create_chain())

@@ -1,21 +1,31 @@
-import torch
-from transformers import RobertaTokenizerFast, EncoderDecoderModel
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
-device = "cuda" if torch.cuda.is_available() else "cpu"
-ckpt = "mrm8488/camembert2camembert_shared-finetuned-french-summarization"
-tokenizer = RobertaTokenizerFast.from_pretrained(ckpt)
-model = EncoderDecoderModel.from_pretrained(ckpt).to(device)
+model_name = "csebuetnlp/mT5_multilingual_XLSum"
+tokenizer = None
+model = None
 
 
-def generate_summary(text):
-    inputs = tokenizer(
-        [text],
+def generate_summary(article_text: str) -> str:
+    global tokenizer, model
+    if model is None:
+        model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
+    if tokenizer is None:
+        tokenizer = AutoTokenizer.from_pretrained(model_name)
+
+    input_ids = tokenizer(
+        [article_text],
+        return_tensors="pt",
         padding="max_length",
         truncation=True,
-        max_length=130,
-        return_tensors="pt",
+        max_length=512,
+    )["input_ids"]
+
+    output_ids = model.generate(
+        input_ids=input_ids, max_length=84, no_repeat_ngram_size=2, num_beams=4
+    )[0]
+
+    summary = tokenizer.decode(
+        output_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False
     )
-    input_ids = inputs.input_ids.to(device)
-    attention_mask = inputs.attention_mask.to(device)
-    output = model.generate(input_ids, attention_mask=attention_mask)
-    return tokenizer.decode(output[0], skip_special_tokens=True)
+
+    return summary
