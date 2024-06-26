@@ -7,7 +7,6 @@ const Header = () => {
         <NavBarContainer>
             <Menu/>
             <MenuItem to="/">MemoGotchi</MenuItem>
-            <MenuItem to="/">SOS</MenuItem>
         </NavBarContainer>
     );
 };
@@ -27,7 +26,7 @@ const NavBarContainer = ({ children, ...props }) => {
         <Flex
             as="nav"
             align="center"
-            justify="space-between"
+            justify="flex-start"
             wrap="wrap"
             w="100%"
             p={4}
