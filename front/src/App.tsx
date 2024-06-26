@@ -26,7 +26,7 @@ function App() {
 
     return (
         <>
-            <Flex align="center" justifyContent="space-between" h="100vh" flexDirection="column">
+            <Flex backgroundColor={"background"} align="center" justifyContent="space-between" h="100vh" flexDirection="column">
                 <Header/>
                 <Box alignSelf="flex-start" w="100vw" p={4}>
                     <PatientCard patient={PatientMauriceDupont}/>

@@ -10,7 +10,7 @@ const PatientCard = (
     }: { patient: Patient }
 ) => {
     return (
-        <Card variant={"elevated"} size={"sm"}>
+        <Card rounded={"xl"} boxShadow='md' variant={"elevated"} size={"sm"}>
             <CardBody>
                 <Flex flexDirection="column" mb={2}>
                     <Text size='xs'>
