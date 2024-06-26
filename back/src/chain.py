@@ -1,12 +1,11 @@
 def create_chain():
     import os
 
-    provider = os.environ.get("PROVIDER", "ollama")
     model = os.environ.get("MODEL", "llama3")
 
     from src.llm import get_llm
 
-    llm = get_llm(provider, model)
+    llm = get_llm(model)
 
     prompt_template = """Rédiger un résumé concis des éléments suivants :
 
