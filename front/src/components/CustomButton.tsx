@@ -1,7 +1,27 @@
-import { forwardRef } from 'react';
+import {ForwardedRef, forwardRef} from 'react';
 import { Box, Text, Badge, Icon } from '@chakra-ui/react';
+import {IconType} from "react-icons";
 
-const CustomButton = forwardRef(({ icon, text, iconColor, bgColor, borderColor = "transparent", badgeContent, onClick }, ref) => {
+const CustomButton = forwardRef((
+    {
+        icon,
+        text,
+        iconColor,
+        bgColor,
+        borderColor = "transparent",
+        badgeContent,
+        onClick
+    }: {
+        icon: IconType,
+        text?: string,
+        iconColor?: string,
+        bgColor?: string,
+        borderColor?: string,
+        badgeContent?: string|number,
+        onClick?: () => void
+    },
+    ref: ForwardedRef<HTMLDivElement>
+) => {
     return (
         <Box display="flex" flexDirection="column" cursor={"pointer"} alignItems="center" onClick={onClick} ref={ref}>
             <Box

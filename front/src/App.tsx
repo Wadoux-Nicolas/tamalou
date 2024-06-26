@@ -22,14 +22,17 @@ function App() {
                 <Box
                     maxW='800px'
                     p='8'
+                    gap={8}
+                    display="flex"
+                    flexDirection={"column"}
                 >
-                    <Center>
-                        <PenguinComponent/>
-                    </Center>
-
                     <PatientCard
                         patient={PatientMauriceDupont}
                     />
+
+                    <Center>
+                        <PenguinComponent/>
+                    </Center>
 
                     <Messages
                         messages={[
