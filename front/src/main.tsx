@@ -6,6 +6,7 @@ import "./index.css";
 
 const colors = {
     blue: {
+        lightest: "#bfe6ec",
         light: "#97CAD3",
         main: "#13869A",
     },
