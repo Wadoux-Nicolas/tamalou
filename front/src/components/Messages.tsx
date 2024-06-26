@@ -1,12 +1,14 @@
 import {
+    Alert,
+    AlertIcon,
     Modal, ModalBody,
     ModalCloseButton,
     ModalContent, ModalFooter,
     ModalHeader,
-    ModalOverlay,
+    ModalOverlay, Spinner, Text,
     useDisclosure
 } from "@chakra-ui/react";
-import {MutableRefObject, useRef} from "react";
+import {MutableRefObject, useEffect, useRef, useState} from "react";
 import {Message, MessageProps} from "./Message.tsx";
 import {TextInput} from "./TextInput.tsx";
 import CustomButton from "./CustomButton.tsx";
@@ -18,6 +20,46 @@ export const Messages = (
 ) => {
     const initialRef: MutableRefObject<HTMLTextAreaElement | null> = useRef(null)
     const {isOpen, onOpen, onClose} = useDisclosure()
+    const [newMessage, setNewMessage] = useState('')
+    const [sendingFailed, setSendingFailed] = useState(false)
+    const [sending, setSending] = useState(false)
+    const bodyRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (bodyRef.current) {
+            bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
+        }
+    }, [messages]);
+
+    const submitMessage = () => {
+        if (newMessage === '') {
+            return
+        }
+
+        setSendingFailed(false)
+        setSending(true)
+        fetch('http://localhost:8000/message', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                input: newMessage,
+                role: "user",
+                shouldBeAnalyzed: true
+            }),
+        })
+            .then(response => response.json())
+            .then(() => {
+                setNewMessage('')
+            })
+            .catch(() => {
+                setSendingFailed(true)
+            })
+            .finally(() => {
+                setSending(false)
+            })
+    }
 
     return (
         <div>
@@ -39,7 +81,7 @@ export const Messages = (
                 <ModalContent>
                     <ModalHeader>Messages</ModalHeader>
                     <ModalCloseButton/>
-                    <ModalBody>
+                    <ModalBody ref={bodyRef}>
                         {
                             messages.map((message, index) => (
                                 <Message
@@ -61,9 +103,14 @@ export const Messages = (
                         }
 
                         {messages.length === 0 &&
-                            <Message
-                                message={{type: 'errored', content: 'Aucun message à afficher'}}
-                            />
+                            <Text>Aucun message à afficher</Text>
+                        }
+
+                        {sendingFailed &&
+                            <Alert status='error'>
+                                <AlertIcon/>
+                                Une erreur est survenue lors de l'envoi du message
+                            </Alert>
                         }
                     </ModalBody>
                     <ModalFooter
@@ -73,12 +120,22 @@ export const Messages = (
                             placeholder='Ecrire un message'
                             resize={'none'}
                             ref={initialRef}
+                            handleInputChange={(e) => setNewMessage(e.target.value)}
                         />
-                        <CustomButton
-                            icon={FaPaperPlane}
-                            bgColor={"green.main"}
-                            iconColor={"white"}
-                        />
+
+                        {sending &&
+                            <Spinner
+                                color={"green.main"}
+                            />
+                        }
+                        {!sending &&
+                            <CustomButton
+                                icon={FaPaperPlane}
+                                bgColor={"green.main"}
+                                iconColor={"white"}
+                                onClick={submitMessage}
+                            />
+                        }
                     </ModalFooter>
                 </ModalContent>
             </Modal>
