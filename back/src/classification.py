@@ -5,7 +5,7 @@ classifier = pipeline("zero-shot-classification",
 
 def classification(msg): 
     
-    candidate_labels = ['bonne santé', 'fatigué', 'fievreux','douleurs','en alerte','sueurs','diarrhé','vomissements',"perte d'appétit",'saignement',"en attente d'une prise de soins"]
+    candidate_labels = ['normal', 'diarrhé', 'alerte', 'sueur', 'fievreux', 'saignement', 'vomissements', 'fatigue', 'depression', 'douleur', 'en_attente_de_soins']
     
     result = classifier(msg, candidate_labels)
 
