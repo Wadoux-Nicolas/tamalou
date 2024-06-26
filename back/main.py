@@ -26,7 +26,7 @@ def read_item(input_request: InputRequest):
 def read_item(input_request: InputRequest):
     output = classification(input_request.input)
     messages.append({"message":input_request.input , "catégorie": output['labels']})
-    print("Messages:", messages)
+
     return {"input": input_request.input, "output": output}
 
 
