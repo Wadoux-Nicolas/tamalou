@@ -8,6 +8,7 @@ import CustomButton from './components/CustomButton';
 import GroupInformationButtons from './components/GroupInformationsButtons';
 import SlideContent from './components/SlideContent';
 import {FaMessage} from "react-icons/fa6";
+import PenguinComponent from "./components/avatar.tsx"
 
 function App() {
     const { isOpen, onToggle } = useDisclosure();
@@ -29,6 +30,7 @@ function App() {
                 <Box alignSelf="flex-start" p="8" w="100vw">
                     <PatientCard patient={PatientMauriceDupont} />
                 </Box>
+                <PenguinComponent/>
                 <Flex flexDirection="column">
                     <GroupInformationButtons handleButtonClick={handleButtonClick} />
                     <Slide direction="bottom" in={isOpen} style={{ zIndex: 10 }}>
