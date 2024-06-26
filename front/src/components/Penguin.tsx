@@ -1,9 +1,8 @@
-import React from 'react';
-import {Box, Center, Flex, Text} from '@chakra-ui/react';
+import {Box, Center, Flex} from '@chakra-ui/react';
 import PenguinSVG from "../assets/normal.svg";
+import {Message} from "./Message.tsx";
 
-
-const PenguinComponent = () => {
+const Penguin = () => {
     return (
         <Flex align="center" position="relative">
             <Box
@@ -32,15 +31,17 @@ const PenguinComponent = () => {
                 position="absolute"
                 top="0px"
                 left="0px"
-                bg="white"
-                border="1px solid #ccc"
-                borderRadius="md"
-                p="2"
             >
-                <Text>salut !</Text>
+                <Message
+                    outlined={true}
+                    message={{
+                        content: "Salut !",
+                        type: "sent",
+                    }}
+                />
             </Box>
         </Flex>
     );
 };
 
-export default PenguinComponent;
+export default Penguin;
