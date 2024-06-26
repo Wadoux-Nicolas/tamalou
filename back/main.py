@@ -29,7 +29,7 @@ def read_root():
 
 
 @app.post("/message")
-def read_item(input_request: InputRequest):
+def post_message(input_request: InputRequest):
     output = classification(input_request.input)
     messages.append({"message": input_request.input, "catégorie": output["labels"]})
 
@@ -37,7 +37,7 @@ def read_item(input_request: InputRequest):
 
 
 @app.get("/messages")
-def read_item():
+def get_messages():
     return messages
 
 
