@@ -1,14 +1,14 @@
 import React from 'react';
-import { Box, Flex, Text } from '@chakra-ui/react';
+import {Box, Center, Flex, Text} from '@chakra-ui/react';
 import PenguinSVG from "../assets/normal.svg";
 
 
 const PenguinComponent = () => {
     return (
-        <Flex direction="column" align="center" position="relative">
+        <Flex align="center" position="relative">
             <Box
-                w="300px"
-                h="300px"
+                w="400px"
+                h="400px"
                 bg="#a8dadc"
                 borderRadius="full"
                 display="flex"
@@ -17,15 +17,16 @@ const PenguinComponent = () => {
                 overflow="hidden"
                 position="relative"
             >
-                <Box
-                    w="100%"
-                    h="100%"
-                    position="relative"
-                    left="9%"
-                >
-                    <img src={PenguinSVG}/>
+                <Center>
+                    <Box
+                        w="100%"
+                        h="100%"
+                        position="relative"
+                    >
+                        <img src={PenguinSVG}/>
 
-                </Box>
+                    </Box>
+                </Center>
             </Box>
             <Box
                 position="absolute"
