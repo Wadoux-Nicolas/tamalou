@@ -2,7 +2,7 @@ import {Box, Center, Flex} from '@chakra-ui/react';
 import PenguinSVG from "../assets/normal.svg";
 import {Message} from "./Message.tsx";
 
-const PenguinComponent = () => {
+const Penguin = () => {
     return (
         <Flex align="center" position="relative">
             <Box
@@ -44,4 +44,4 @@ const PenguinComponent = () => {
     );
 };
 
-export default PenguinComponent;
+export default Penguin;

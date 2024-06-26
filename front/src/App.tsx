@@ -9,12 +9,13 @@ import GroupInformationButtons from './components/GroupInformationsButtons';
 import SlideContent from './components/SlideContent';
 import PenguinComponent from "./components/avatar.tsx"
 import {Messages} from "./components/Messages.tsx";
+import {IconType} from "react-icons";
 
 function App() {
     const {isOpen, onToggle} = useDisclosure();
     const [content, setContent] = useState({});
 
-    const handleButtonClick = (icon, title, description) => {
+    const handleButtonClick = (icon: IconType, title: string, description: string) => {
         setContent({icon, title, description});
         onToggle();
     };
