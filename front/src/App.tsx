@@ -12,16 +12,18 @@ import {Messages} from "./components/Messages.tsx";
 import {IconType} from "react-icons";
 
 function App() {
-    const {isOpen, onToggle} = useDisclosure();
+    const {isOpen, onOpen, onClose} = useDisclosure();
     const [content, setContent] = useState({});
 
     const handleButtonClick = (icon: IconType, title: string, description: string) => {
         setContent({icon, title, description});
-        onToggle();
+        if (!isOpen) {
+            onOpen();
+        }
     };
 
     const closeSlide = () => {
-        onToggle();
+        onClose();
     };
 
     return (
