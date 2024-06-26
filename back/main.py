@@ -21,7 +21,8 @@ messages = []
 
 class InputRequest(BaseModel):
     input: str
-
+    role: str
+    shouldBeAnalyzed: bool
 
 @app.get("/")
 def read_root():
@@ -30,10 +31,14 @@ def read_root():
 
 @app.post("/message")
 def post_message(input_request: InputRequest):
-    output = classification(input_request.input)
-    messages.append({"message": input_request.input, "catégorie": output["labels"]})
+    output = {"labels": "none"}
 
-    return {"input": input_request.input, "output": output}
+    if input_request.shouldBeAnalyzed:
+        output = classification(input_request.input)
+
+    messages.append({"message": input_request.input, "catégorie": output["labels"], "role": input_request.role})
+
+    return {"input": input_request.input, "output": output, "role": input_request.role}
 
 
 @app.get("/messages")
