@@ -1,84 +1,44 @@
+import {useState} from 'react';
+import {Box, Flex, Slide, useDisclosure} from '@chakra-ui/react';
+import {FaHospitalUser, FaPhone} from 'react-icons/fa';
+import Header from './components/Header';
+import PatientCard from './components/PatientCard';
+import {PatientMauriceDupont} from './mocks/patient';
+import CustomButton from './components/CustomButton';
+import GroupInformationButtons from './components/GroupInformationsButtons';
+import SlideContent from './components/SlideContent';
 import PenguinComponent from "./components/avatar.tsx"
-import Header from "./components/Header.tsx";
-import PatientCard from "./components/PatientCard.tsx";
-import {Box, Center, Flex} from "@chakra-ui/react";
-import {PatientMauriceDupont} from "./mocks/patient.ts";
 import {Messages} from "./components/Messages.tsx";
-import CustomButton from "./components/CustomButton.tsx";
-import {FaBandAid, FaPills, FaUtensils, FaDumbbell, FaMoon, FaPhone, FaHospitalUser} from "react-icons/fa";
 
 function App() {
+    const {isOpen, onToggle} = useDisclosure();
+    const [content, setContent] = useState({});
+
+    const handleButtonClick = (icon, title, description) => {
+        setContent({icon, title, description});
+        onToggle();
+    };
+
+    const closeSlide = () => {
+        onToggle();
+    };
+
     return (
         <>
-            <Flex
-                align="center"
-                justifyContent="space-between"
-                h="100vh"
-                flexDirection="column"
-            >
+            <Flex align="center" justifyContent="space-between" h="100vh" flexDirection="column" gap="8">
                 <Header/>
-                <Box
-                    maxW='800px'
-                    p='8'
-                    gap={8}
-                    display="flex"
-                    flexDirection={"column"}
-                >
-                    <PatientCard
-                        patient={PatientMauriceDupont}
-                    />
-
-                    <Center>
-                        <PenguinComponent/>
-                    </Center>
-
-
+                <Box alignSelf="flex-start" p="8" w="100vw">
+                    <PatientCard patient={PatientMauriceDupont}/>
                 </Box>
-                <Box>
-                    <Flex justifyContent="center" mb={6}>
-                        <Flex justify="space-evenly" gap={12} maxW="800px" width="100%">
-                            <CustomButton
-                                icon={FaBandAid}
-                                text="Pansements"
-                                badgeContent={1}
-                                borderColor={"blue.main"}
-                            />
-                            <CustomButton
-                                icon={FaPills}
-                                text="Médicaments"
-                                badgeContent={1}
-                                borderColor={"blue.main"}
-                            />
-                            <CustomButton
-                                icon={FaUtensils}
-                                text="Repas"
-                                borderColor={"blue.main"}
-                            />
-                        </Flex>
-                    </Flex>
-                    <Flex justifyContent="center">
-                        <Flex justify="space-evenly" maxW="600px" width="100%">
-                            <CustomButton
-                                icon={FaDumbbell}
-                                text="Exercice"
-                                badgeContent={1}
-                                borderColor={"blue.main"}
-                            />
-                            <CustomButton
-                                icon={FaMoon}
-                                text="Repos"
-                                badgeContent={1}
-                                borderColor={"blue.main"}
-                            />
-                        </Flex>
-                    </Flex>
-                </Box>
-                <Flex alignSelf={"flex-end"} flexDirection="column" p={"4"} gap={"2"}>
-                    <CustomButton
-                        icon={FaPhone}
-                        iconColor={"white"}
-                        bgColor={"alert"}
-                    />
+                <PenguinComponent/>
+                <Flex flexDirection="column">
+                    <GroupInformationButtons handleButtonClick={handleButtonClick}/>
+                    <Slide direction="bottom" in={isOpen} style={{zIndex: 10}}>
+                        <SlideContent content={content} closeSlide={closeSlide}/>
+                    </Slide>
+                </Flex>
+                <Flex alignSelf="flex-end" flexDirection="column" p="4" gap="2">
+                    <CustomButton icon={FaPhone} iconColor="white" bgColor="alert"/>
                     <Messages
                         messages={[
                             {
