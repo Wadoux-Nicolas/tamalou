@@ -1,31 +1,11 @@
 import React from 'react';
 import { Box, Flex, Text } from '@chakra-ui/react';
-import { ReactComponent as PenguinSVG } from './normal.svg';
+import PenguinSVG from "../assets/normal.svg";
 
-const PenguinComponent = ({ text }) => {
+
+const PenguinComponent = () => {
     return (
         <Flex direction="column" align="center" position="relative">
-            <Box
-                position="absolute"
-                top="-60px"
-                left="20px"
-                bg="white"
-                border="1px solid #ccc"
-                borderRadius="md"
-                boxShadow="md"
-                p="2"
-                _after={{
-                    content: '""',
-                    position: 'absolute',
-                    bottom: '-10px',
-                    left: '10px',
-                    borderWidth: '10px',
-                    borderStyle: 'solid',
-                    borderColor: 'white transparent transparent transparent',
-                }}
-            >
-                <Text>{text}</Text>
-            </Box>
             <Box
                 w="300px"
                 h="300px"
@@ -34,8 +14,29 @@ const PenguinComponent = ({ text }) => {
                 display="flex"
                 justifyContent="center"
                 alignItems="center"
+                overflow="hidden"
+                position="relative"
             >
-                <PenguinSVG style={{ width: '150px', height: 'auto' }} />
+                <Box
+                    w="100%"
+                    h="100%"
+                    position="relative"
+                    left="9%"
+                >
+                    <img src={PenguinSVG}/>
+
+                </Box>
+            </Box>
+            <Box
+                position="absolute"
+                top="0px"
+                left="0px"
+                bg="white"
+                border="1px solid #ccc"
+                borderRadius="md"
+                p="2"
+            >
+                <Text>salut !</Text>
             </Box>
         </Flex>
     );
