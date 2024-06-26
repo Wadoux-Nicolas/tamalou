@@ -1,7 +1,31 @@
-import React, { forwardRef } from 'react';
+import {ForwardedRef, forwardRef} from 'react';
 import { Box, Text, Badge, Icon } from '@chakra-ui/react';
+import {IconType} from "react-icons";
 
-const CustomButton = forwardRef(({ icon, text, iconColor, bgColor, borderColor = "transparent", badgeContent, onClick }, ref) => {
+const CustomButton = forwardRef((
+    {
+        icon,
+        text,
+        iconColor,
+        bgColor,
+        borderColor = "transparent",
+        badgeContent,
+        onClick,
+        height = "50px",
+        width = "50px",
+    }: {
+        icon: IconType,
+        text?: string,
+        iconColor?: string,
+        bgColor?: string,
+        borderColor?: string,
+        badgeContent?: string|number,
+        onClick?: () => void,
+        height?: string,
+        width?: string
+    },
+    ref: ForwardedRef<HTMLDivElement>
+) => {
     return (
         <Box display="flex" flexDirection="column" cursor={"pointer"} alignItems="center" onClick={onClick} ref={ref}>
             <Box
@@ -14,8 +38,8 @@ const CustomButton = forwardRef(({ icon, text, iconColor, bgColor, borderColor =
                 borderRadius="full"
                 bgColor={bgColor}
                 p={4}
-                width="60px"
-                height="60px"
+                width={width}
+                height={height}
             >
                 {badgeContent && (
                     <Badge
@@ -35,7 +59,7 @@ const CustomButton = forwardRef(({ icon, text, iconColor, bgColor, borderColor =
                         {badgeContent}
                     </Badge>
                 )}
-                <Icon as={icon} color={iconColor} boxSize="30px" />
+                <Icon as={icon} color={iconColor} />
             </Box>
             {text && <Text fontSize="0.8rem" mt={"2"} textAlign="center">{text}</Text>}
         </Box>

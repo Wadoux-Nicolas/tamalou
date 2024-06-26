@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import {ReactNode, useRef} from "react";
 import { IoIosMenu } from "react-icons/io";
 import {
     Box,
@@ -14,7 +14,7 @@ import CustomButton from "./CustomButton.tsx";
 
 function Menu() {
     const {isOpen, onOpen, onClose} = useDisclosure();
-    const btnRef = useRef();
+    const btnRef = useRef(null);
 
     return (
         <>
@@ -32,7 +32,7 @@ function Menu() {
                 <DrawerOverlay
                 />
                 <DrawerContent
-                    bg="blue.main"
+                    bg="green.main"
                     color="white"
                 >
                     <DrawerCloseButton/>
@@ -61,18 +61,23 @@ function Menu() {
     );
 }
 
-function MenuItem({children, to = "/"}) {
+function MenuItem(
+    {children, to = "/"}: { children: ReactNode, to?: string }
+) {
     return (
         <Button
             display="block"
             variant="ghost"
             color="white"
-            href={to}
             width="100%"
             textAlign="left"
             _hover={{
                 bg: "white",
-                color: "blue.main",
+                color: "green.main",
+            }}
+            onClick={() => {
+                // TODO change to router if need to be used in this project
+                window.location.href = to;
             }}
         >
             {children}

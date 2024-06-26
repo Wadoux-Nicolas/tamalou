@@ -6,10 +6,12 @@ import '@fontsource/almarai';
 import "./index.css";
 
 const colors = {
-    blue: {
-        light: "#97CAD3",
-        main: "#13869A",
+    green: {
+        lightest: "#C8E4B2",
+        light: "#9ED2BE",
+        main: "#7EAA92",
     },
+    grey: "#808080",
     white: "#FFFFFF",
     alert: "#F74C48",
     black: "#000000"

@@ -1,84 +1,79 @@
-import PenguinComponent from "./components/avatar.tsx"
-import Header from "./components/Header.tsx";
-import PatientCard from "./components/PatientCard.tsx";
-import {Box, Center, Flex} from "@chakra-ui/react";
-import {PatientMauriceDupont} from "./mocks/patient.ts";
-import CustomButton from "./components/CustomButton.tsx";
-import {FaBandAid, FaPills, FaUtensils, FaDumbbell, FaMoon, FaPhone} from "react-icons/fa";
-import {FaMessage} from "react-icons/fa6";
+import {useState} from 'react';
+import {Box, Flex, Slide, useDisclosure} from '@chakra-ui/react';
+import {FaHospitalUser, FaPhone} from 'react-icons/fa';
+import Header from './components/Header';
+import PatientCard from './components/PatientCard';
+import {PatientMauriceDupont} from './mocks/patient';
+import CustomButton from './components/CustomButton';
+import GroupInformationButtons from './components/GroupInformationsButtons';
+import SlideContent from './components/SlideContent';
+import PenguinComponent from "./components/Penguin.tsx"
+import {Messages} from "./components/Messages.tsx";
+import {IconType} from "react-icons";
 
 function App() {
+    const {isOpen, onToggle} = useDisclosure();
+    const [content, setContent] = useState({});
+
+    const handleButtonClick = (icon: IconType, title: string, description: string) => {
+        setContent({icon, title, description});
+        onToggle();
+    };
+
+    const closeSlide = () => {
+        onToggle();
+    };
 
     return (
         <>
-            <Flex
-                align="center"
-                justifyContent="space-between"
-                h="100vh"
-                flexDirection="column"
-            >
+            <Flex align="center" justifyContent="space-between" h="100vh" flexDirection="column">
                 <Header/>
-                <Box
-                    maxW='800px'
-                    p='8'
-                >
-                    <Center>
-                        <PenguinComponent/>
-                    </Center>
-
-                    <PatientCard
-                        patient={PatientMauriceDupont}
-                    />
+                <Box alignSelf="flex-start" w="100vw" p={4}>
+                    <PatientCard patient={PatientMauriceDupont}/>
                 </Box>
-                <Box>
-                    <Flex justifyContent="center" mb={6}>
-                        <Flex justify="space-evenly" gap={12} maxW="800px" width="100%">
-                            <CustomButton
-                                icon={FaBandAid}
-                                text="Pansements"
-                                badgeContent={1}
-                                borderColor={"blue.main"}
-                            />
-                            <CustomButton
-                                icon={FaPills}
-                                text="Médicaments"
-                                badgeContent={1}
-                                borderColor={"blue.main"}
-                            />
-                            <CustomButton
-                                icon={FaUtensils}
-                                text="Repas"
-                                borderColor={"blue.main"}
-                            />
-                        </Flex>
-                    </Flex>
-                    <Flex justifyContent="center">
-                        <Flex justify="space-evenly" maxW="600px" width="100%">
-                            <CustomButton
-                                icon={FaDumbbell}
-                                text="Exercice"
-                                badgeContent={1}
-                                borderColor={"blue.main"}
-                            />
-                            <CustomButton
-                                icon={FaMoon}
-                                text="Repos"
-                                badgeContent={1}
-                                borderColor={"blue.main"}
-                            />
-                        </Flex>
-                    </Flex>
-                </Box>
-                <Flex alignSelf={"flex-end"} flexDirection="column" p={"4"} gap={"2"}>
-                    <CustomButton
-                        icon={FaPhone}
-                        iconColor={"white"}
-                        bgColor={"alert"}
-                    />
-                    <CustomButton
-                        icon={FaMessage}
-                        iconColor={"white"}
-                        bgColor={"blue.main"}
+                <PenguinComponent/>
+                <Flex flexDirection="column">
+                    <GroupInformationButtons handleButtonClick={handleButtonClick}/>
+                    <Slide direction="bottom" in={isOpen} style={{zIndex: 10}}>
+                        <SlideContent content={content} closeSlide={closeSlide}/>
+                    </Slide>
+                </Flex>
+                <Flex alignSelf="flex-end" flexDirection="column" p="4" gap="2">
+                    <CustomButton icon={FaPhone} iconColor="white" bgColor="alert"/>
+                    <Messages
+                        messages={[
+                            {
+                                type: 'sent',
+                                content: 'Hello Maurice, how are you today?',
+                                avatarName: 'Maurice DUPONT',
+                            },
+                            {
+                                avatarIcon: FaHospitalUser,
+                                type: 'received',
+                                content: 'Hello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank you'
+                            },
+                            {
+                                type: 'errored',
+                                content: 'No messages to display',
+                            },
+                            {
+                                avatarName: 'Maurice DUPONT',
+                                type: 'sent',
+                                outlined: true,
+                                content: 'Hello Maurice, how are you today?',
+                            },
+                            {
+                                avatarIcon: FaHospitalUser,
+                                type: 'received',
+                                outlined: true,
+                                content: 'Hello, I am fine, thank you',
+                            },
+                            {
+                                type: 'errored',
+                                outlined: true,
+                                content: 'No messages to display',
+                            },
+                        ]}
                     />
                 </Flex>
             </Flex>

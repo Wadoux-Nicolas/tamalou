@@ -29,8 +29,7 @@ const NavBarContainer = ({ children, ...props }) => {
             justify="flex-start"
             wrap="wrap"
             w="100%"
-            p={4}
-            bg="blue.main"
+            bg="green.main"
             color="white"
             {...props}
         >

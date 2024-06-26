@@ -1,5 +1,8 @@
-import {Box, Card, CardBody, CardHeader, Heading, Stack, StackDivider, Text} from "@chakra-ui/react";
+import {Card, CardBody, Flex, Text} from "@chakra-ui/react";
 import {Patient} from "../models/patient.ts";
+import {FaStethoscope} from "react-icons/fa6";
+import CustomButton from "./CustomButton.tsx";
+
 
 const PatientCard = (
     {
@@ -7,39 +10,28 @@ const PatientCard = (
     }: { patient: Patient }
 ) => {
     return (
-        <Card>
-            <CardHeader
-                pb={0}
-            >
-                <Heading size='md' color="blue.main">
-                    FICHE PATIENT
-                </Heading>
-            </CardHeader>
-
+        <Card variant={"elevated"} size={"sm"}>
             <CardBody>
-                <Stack
-                    divider={
-                        <StackDivider/>
-                    }
-                    spacing='4'
-                >
-                    <Box>
-                        <Heading size='xs'>
-                            {patient.firstName} {patient.lastName}
-                        </Heading>
-                        <Text pt='2' fontSize='sm'>
-                            {patient.age} ans, {patient.nationality}, {patient.height} cm, {patient.weight} kg
-                        </Text>
-                    </Box>
-                    <Box>
-                        <Heading size='xs'>
-                            Pathologies
-                        </Heading>
-                        <Text pt='2' fontSize='sm'>
-                            {patient.pathologiesSummary}
-                        </Text>
-                    </Box>
-                </Stack>
+                <Flex flexDirection="column" mb={2}>
+                    <Text size='xs'>
+                        {patient.firstName} {patient.lastName}
+                    </Text>
+                    <Text fontSize='xs' color={"grey"}>
+                        {patient.age} ans, {patient.nationality}, {patient.height} cm, {patient.weight} kg
+                    </Text>
+                </Flex>
+                <Flex gap={2}>
+                    <CustomButton
+                        width={"20px"}
+                        height={"20px"}
+                        iconColor={"white"}
+                        bgColor={"green.main"}
+                        icon={FaStethoscope}
+                    />
+                    <Text pt='2' fontSize='xs'>
+                        {patient.pathologiesSummary}
+                    </Text>
+                </Flex>
             </CardBody>
         </Card>
     );
