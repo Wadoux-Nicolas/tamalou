@@ -18,6 +18,11 @@ const colors = {
 const theme = extendTheme({ colors })
 
 const rootElement = document.getElementById('root')
+
+if (!rootElement) {
+    throw new Error('No element with id root found')
+}
+
 ReactDOM.createRoot(rootElement).render(
     <React.StrictMode>
         <ChakraProvider theme={theme}>

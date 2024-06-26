@@ -1,16 +1,24 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
-import MenuBurger from "./components/MenuBurger.tsx";
 import PenguinComponent from "./components/avatar.tsx"
 
-function App() {
-  const [count, setCount] = useState(0);
 
+import Header from "./components/Header.tsx";
+import PatientCard from "./components/PatientCard.tsx";
+import {Box} from "@chakra-ui/react";
+import {PatientMauriceDupont} from "./mocks/patient.ts";
+function App() {
   return (
     <>
+        <Header/>
         <PenguinComponent/>
+        <Box
+            maxW='800px'
+            p='8'
+        >
+            <PatientCard
+                patient={PatientMauriceDupont}
+            />
+        </Box>
     </>
   );
 }
