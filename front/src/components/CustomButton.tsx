@@ -9,7 +9,7 @@ const CustomButton = forwardRef(({ icon, text, iconColor, bgColor, borderColor =
                 display="flex"
                 alignItems="center"
                 justifyContent="center"
-                border="2px"
+                border="1px"
                 borderColor={borderColor}
                 borderRadius="full"
                 bgColor={bgColor}
