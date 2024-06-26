@@ -4,7 +4,7 @@ export const Message = (
     {
         message,
         borderRadius = 16,
-        border = '1px solid',
+        border = '2px solid',
         m = 4,
         p = 4,
         otherBoxProps
@@ -17,27 +17,40 @@ export const Message = (
         otherBoxProps?: Record<string, unknown>
     }
 ) => {
+    const isSent = message.type === 'sent' || message.type === 'sent-outlined';
+    const isReceived = message.type === 'received' || message.type === 'received-outlined';
+    const isErrored = message.type === 'errored' || message.type === 'errored-outlined';
+    const isOutlined = message.type === 'sent-outlined' || message.type === 'received-outlined' || message.type === 'errored-outlined';
+    const stateColor = isErrored ? 'alert' : isSent ? 'blue.light' : 'blue.lightest';
+
     return (
         <Box
             m={m}
             p={p}
             border={border}
-            borderColor={message.type === 'errored' ? 'alert' : "transparent"}
+            borderColor={stateColor}
             borderRadius={borderRadius}
-            borderBottomLeftRadius={message.type === 'received' ? 0 : borderRadius}
-            borderBottomRightRadius={message.type === 'sent' ? 0 : borderRadius}
-            bgColor={message.type === 'errored' ? 'transparent' : message.type === 'sent' ? 'blue.light' : 'blue.lightest'}
-            color={message.type === 'errored' ? 'alert' : undefined}
+            borderBottomLeftRadius={isReceived ? 0 : borderRadius}
+            borderBottomRightRadius={isSent ? 0 : borderRadius}
+            bgColor={isOutlined ? 'white' : stateColor}
+            color={isErrored ? 'alert' : undefined}
             {...otherBoxProps}
         >
-            {message.type === 'errored' &&
-                <Alert status='error' bgColor="transparent" p="0">
-                    <AlertIcon/>
+            {isErrored &&
+                <Alert
+                    p="0"
+                    status='error'
+                    bgColor={isOutlined ? 'white' : 'alert'}
+                    color={isOutlined ? 'alert' : 'white'}
+                >
+                    <AlertIcon
+                        color={isOutlined ? 'alert' : 'white'}
+                    />
                     {message.content}
                 </Alert>
             }
 
-            {message.type !== 'errored' &&
+            {!isErrored &&
                 message.content
             }
         </Box>
@@ -49,4 +62,4 @@ export type MessageProps = {
     content: string;
 }
 
-export type MessageType = 'sent' | 'received' | 'errored';
+export type MessageType = 'sent' | 'received' | 'errored' | 'sent-outlined' | 'received-outlined' | 'errored-outlined';

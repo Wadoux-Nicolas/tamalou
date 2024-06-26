@@ -6,10 +6,8 @@ import {PatientMauriceDupont} from "./mocks/patient.ts";
 import {Messages} from "./components/Messages.tsx";
 import CustomButton from "./components/CustomButton.tsx";
 import {FaBandAid, FaPills, FaUtensils, FaDumbbell, FaMoon, FaPhone} from "react-icons/fa";
-import {FaMessage} from "react-icons/fa6";
 
 function App() {
-
     return (
         <>
             <Flex
@@ -34,16 +32,7 @@ function App() {
                         <PenguinComponent/>
                     </Center>
 
-                    <Messages
-                        messages={[
-                            {type: 'sent', content: 'Hello Maurice, how are you today?'},
-                            {
-                                type: 'received',
-                                content: 'Hello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank you'
-                            },
-                            {type: 'errored', content: 'No messages to display'},
-                        ]}
-                    />
+
                 </Box>
                 <Box>
                     <Flex justifyContent="center" mb={6}>
@@ -90,10 +79,18 @@ function App() {
                         iconColor={"white"}
                         bgColor={"alert"}
                     />
-                    <CustomButton
-                        icon={FaMessage}
-                        iconColor={"white"}
-                        bgColor={"blue.main"}
+                    <Messages
+                        messages={[
+                            {type: 'sent', content: 'Hello Maurice, how are you today?'},
+                            {
+                                type: 'received',
+                                content: 'Hello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank you'
+                            },
+                            {type: 'errored', content: 'No messages to display'},
+                            {type: 'sent-outlined', content: 'Hello Maurice, how are you today?'},
+                            {type: 'received-outlined', content: 'Hello, I am fine, thank you'},
+                            {type: 'errored-outlined', content: 'No messages to display'},
+                        ]}
                     />
                 </Flex>
             </Flex>

@@ -10,6 +10,9 @@ import {
 import {useRef} from "react";
 import {Message, MessageProps} from "./Message.tsx";
 import {TextInput} from "./TextInput.tsx";
+import CustomButton from "./CustomButton.tsx";
+import {FaMessage} from "react-icons/fa6";
+import {FaPaperPlane} from "react-icons/fa";
 
 export const Messages = (
     {messages}: { messages: MessageProps[] }
@@ -19,9 +22,12 @@ export const Messages = (
 
     return (
         <div>
-            <Button mt={3} ref={btnRef} onClick={onOpen}>
-                Trigger modal
-            </Button>
+            <CustomButton
+                icon={FaMessage}
+                iconColor={"white"}
+                bgColor={"blue.main"}
+                onClick={onOpen}
+            />
 
             <Modal
                 onClose={onClose}
@@ -51,7 +57,7 @@ export const Messages = (
 
                         {messages.length === 0 &&
                             <Message
-                                message={{type: 'errored', content: 'No messages to display'}}
+                                message={{type: 'errored', content: 'Aucun message à afficher'}}
                             />
                         }
                     </ModalBody>
@@ -62,13 +68,17 @@ export const Messages = (
                             onClick={onClose}
                             mr={24}
                         >
-                            Close
+                            Annuler
                         </Button>
                         <TextInput
                             placeholder='Ecrire un message'
                             resize={'none'}
                         />
-                        <Button colorScheme="blue">Send</Button>
+                        <CustomButton
+                            icon={FaPaperPlane}
+                            bgColor={"blue.main"}
+                            iconColor={"white"}
+                        />
                     </ModalFooter>
                 </ModalContent>
             </Modal>
