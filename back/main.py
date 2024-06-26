@@ -1,3 +1,4 @@
+from src.classification import classification
 from fastapi import FastAPI
 from pydantic import BaseModel
 
@@ -18,4 +19,10 @@ class InputRequest(BaseModel):
 @app.post("/summarize")
 def read_item(input_request: InputRequest):
     output = generate_summary(input_request.input)
+    return {"input": input_request.input, "output": output}
+
+
+@app.post("/message")
+def read_item(input_request: InputRequest):
+    output = classification(input_request.input)
     return {"input": input_request.input, "output": output}
