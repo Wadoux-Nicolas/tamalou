@@ -1,35 +1,24 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import MenuBurger from "./MenuBurger.tsx";
+import CustomButton from "./assets/CustomButton.tsx";
+import {FaBandAid} from "react-icons/fa";
 
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
     <>
+        <CustomButton
+            icon={FaBandAid}
+            text="Pansements"
+            badgeContent={2}
+            borderColor={"blue.main"}
+        />
+        <CustomButton
+            icon={FaBandAid}
+            bgColor={"alert"}
+            iconColor={"white"}
+        />
         <MenuBurger />
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   );
 }

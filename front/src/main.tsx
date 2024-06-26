@@ -2,6 +2,7 @@ import * as React from 'react'
 import {ChakraProvider, extendTheme} from '@chakra-ui/react'
 import * as ReactDOM from 'react-dom/client'
 import App from "./App.tsx";
+import '@fontsource/almarai';
 import "./index.css";
 
 const colors = {
@@ -14,8 +15,11 @@ const colors = {
     black: "#000000"
 }
 
+const fonts = {
+    body: `'Almarai', sans-serif`,
+}
 
-const theme = extendTheme({ colors })
+const theme = extendTheme({ colors, fonts })
 
 const rootElement = document.getElementById('root')
 ReactDOM.createRoot(rootElement).render(
