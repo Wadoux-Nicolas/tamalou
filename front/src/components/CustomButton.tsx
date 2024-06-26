@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { Box, Text, Badge, Icon } from '@chakra-ui/react';
 
-const CustomButton = ({ icon, text, iconColor, bgColor, borderColor = "transparent", badgeContent }) => {
+const CustomButton = forwardRef(({ icon, text, iconColor, bgColor, borderColor = "transparent", badgeContent, onClick }, ref) => {
     return (
-        <Box display="flex" flexDirection="column" alignItems="center">
+        <Box display="flex" flexDirection="column" cursor={"pointer"} alignItems="center" onClick={onClick} ref={ref}>
             <Box
                 position="relative"
                 display="flex"
@@ -20,7 +20,7 @@ const CustomButton = ({ icon, text, iconColor, bgColor, borderColor = "transpare
                 {badgeContent && (
                     <Badge
                         position="absolute"
-                        top="0"
+                        top="-5px"
                         right="0"
                         bg="alert"
                         color="white"
@@ -40,6 +40,6 @@ const CustomButton = ({ icon, text, iconColor, bgColor, borderColor = "transpare
             {text && <Text fontSize="0.8rem" textAlign="center">{text}</Text>}
         </Box>
     );
-};
+});
 
 export default CustomButton;

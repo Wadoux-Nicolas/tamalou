@@ -1,4 +1,5 @@
 import React, {useRef} from "react";
+import { IoIosMenu } from "react-icons/io";
 import {
     Box,
     Button,
@@ -9,6 +10,7 @@ import {
     DrawerOverlay,
     useDisclosure
 } from "@chakra-ui/react";
+import CustomButton from "./CustomButton.tsx";
 
 function Menu() {
     const {isOpen, onOpen, onClose} = useDisclosure();
@@ -16,9 +18,11 @@ function Menu() {
 
     return (
         <>
-            <Button ref={btnRef} colorScheme='teal' onClick={onOpen}>
-                Open
-            </Button>
+            <CustomButton
+                onClick={onOpen}
+                ref={btnRef}
+                icon={IoIosMenu}
+            />
             <Drawer
                 isOpen={isOpen}
                 placement='left'
