@@ -7,7 +7,7 @@ import {PatientMauriceDupont} from './mocks/patient';
 import CustomButton from './components/CustomButton';
 import GroupInformationButtons from './components/GroupInformationsButtons';
 import SlideContent from './components/SlideContent';
-import PenguinComponent from "./components/avatar.tsx"
+import PenguinComponent from "./components/Penguin.tsx"
 import {Messages} from "./components/Messages.tsx";
 import {IconType} from "react-icons";
 
