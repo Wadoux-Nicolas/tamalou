@@ -4,7 +4,7 @@ import { RxCross2 } from "react-icons/rx";
 
 const SlideContent = ({ content, closeSlide }) => {
     return (
-        <Box p="40px" mt="4" boxShadow='outline' mx="auto" bg="white" position="relative">
+        <Box p={4} mx="auto" borderTopRightRadius="2xl" borderTopLeftRadius="2xl" bg="white" position="relative">
             <IconButton
                 aria-label="Close"
                 icon={<RxCross2/>}
@@ -13,8 +13,8 @@ const SlideContent = ({ content, closeSlide }) => {
                 right="10px"
                 onClick={closeSlide}
             />
-            {content.icon && <Icon as={content.icon} color="teal.500" boxSize="24px" mb="4" />}
-            {content.title && <Heading as="h2" fontSize="1rem" mb="4" color="teal.500">{content.title}</Heading>}
+            {content.icon && <Icon as={content.icon} color="green.main" boxSize="20px" mb="2" />}
+            {content.title && <Heading as="h2" fontSize="1rem" mb="4" color="green.main">{content.title}</Heading>}
             {content.description && <Text fontSize="0.8rem">{content.description}</Text>}
         </Box>
     );

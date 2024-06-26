@@ -12,23 +12,25 @@ import {IconType} from "react-icons";
 import {MessagesContextContainer, MessagesProvider} from "./components/MessagesProvider.tsx";
 
 function App() {
-    const {isOpen, onToggle} = useDisclosure();
+    const {isOpen, onOpen, onClose} = useDisclosure();
     const [content, setContent] = useState({});
 
     const handleButtonClick = (icon: IconType, title: string, description: string) => {
         setContent({icon, title, description});
-        onToggle();
+        if (!isOpen) {
+            onOpen();
+        }
     };
 
     const closeSlide = () => {
-        onToggle();
+        onClose();
     };
 
     return (
         <>
-            <Flex align="center" justifyContent="space-between" h="100vh" flexDirection="column">
+            <Flex backgroundColor={"background"} align="center" justifyContent="space-between" h="100vh" flexDirection="column">
                 <Header/>
-                <Box alignSelf="flex-start" w="100vw">
+                <Box alignSelf="flex-start" w="100vw" p={4}>
                     <PatientCard patient={PatientMauriceDupont}/>
                 </Box>
                 <PenguinComponent/>

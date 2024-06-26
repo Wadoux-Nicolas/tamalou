@@ -11,9 +11,11 @@ const colors = {
         light: "#9ED2BE",
         main: "#7EAA92",
     },
+    grey: "#808080",
     white: "#FFFFFF",
     alert: "#F74C48",
-    black: "#000000"
+    black: "#000000",
+    background: "#F7F7F7"
 }
 
 const fonts = {
