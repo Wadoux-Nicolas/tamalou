@@ -1,5 +1,7 @@
-import {Box, Card, CardBody, CardHeader, Heading, Stack, StackDivider, Text} from "@chakra-ui/react";
+import {Box, Card, CardBody, Heading, Stack, StackDivider, Text} from "@chakra-ui/react";
 import {Patient} from "../models/patient.ts";
+import { FaStethoscope } from "react-icons/fa6";
+
 
 const PatientCard = (
     {
@@ -8,20 +10,12 @@ const PatientCard = (
 ) => {
     return (
         <Card>
-            <CardHeader
-                pb={0}
-            >
-                <Heading size='md' color="blue.main">
-                    FICHE PATIENT
-                </Heading>
-            </CardHeader>
-
             <CardBody>
                 <Stack
                     divider={
                         <StackDivider/>
                     }
-                    spacing='4'
+                    spacing='2'
                 >
                     <Box>
                         <Heading size='xs'>
@@ -32,9 +26,7 @@ const PatientCard = (
                         </Text>
                     </Box>
                     <Box>
-                        <Heading size='xs'>
-                            Pathologies
-                        </Heading>
+                        <FaStethoscope/>
                         <Text pt='2' fontSize='sm'>
                             {patient.pathologiesSummary}
                         </Text>

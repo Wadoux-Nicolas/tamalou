@@ -26,9 +26,9 @@ function App() {
 
     return (
         <>
-            <Flex align="center" justifyContent="space-between" h="100vh" flexDirection="column" gap="8">
+            <Flex align="center" justifyContent="space-between" h="100vh" flexDirection="column">
                 <Header/>
-                <Box alignSelf="flex-start" p="8" w="100vw">
+                <Box alignSelf="flex-start" w="100vw">
                     <PatientCard patient={PatientMauriceDupont}/>
                 </Box>
                 <PenguinComponent/>

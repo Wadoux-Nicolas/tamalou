@@ -12,20 +12,20 @@ const GroupInformationButtons = ({ handleButtonClick }) => {
                         icon={FaBandAid}
                         text="Pansements"
                         badgeContent={1}
-                        borderColor={"blue.main"}
+                        borderColor={"green.main"}
                         onToggle={() => handleButtonClick(FaBandAid, 'Pansements', 'Informations sur les pansements')}
                     />
                     <SlideButton
                         icon={FaPills}
                         text="Médicaments"
                         badgeContent={1}
-                        borderColor={"blue.main"}
+                        borderColor={"green.main"}
                         onToggle={() => handleButtonClick(FaPills, 'Médicaments', 'Informations sur les médicaments')}
                     />
                     <SlideButton
                         icon={FaUtensils}
                         text="Repas"
-                        borderColor={"blue.main"}
+                        borderColor={"green.main"}
                         onToggle={() => handleButtonClick(FaUtensils, 'Repas', 'Informations sur les repas')}
                     />
                 </Flex>
@@ -36,14 +36,14 @@ const GroupInformationButtons = ({ handleButtonClick }) => {
                         icon={FaDumbbell}
                         text="Exercice"
                         badgeContent={1}
-                        borderColor={"blue.main"}
+                        borderColor={"green.main"}
                         onToggle={() => handleButtonClick(FaDumbbell, 'Exercice', 'Informations sur les exercices')}
                     />
                     <SlideButton
                         icon={FaMoon}
                         text="Repos"
                         badgeContent={1}
-                        borderColor={"blue.main"}
+                        borderColor={"green.main"}
                         onToggle={() => handleButtonClick(FaMoon, 'Repos', 'Informations sur le repos')}
                     />
                 </Flex>

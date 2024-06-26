@@ -24,7 +24,7 @@ export const Messages = (
             <CustomButton
                 icon={FaMessage}
                 iconColor={"white"}
-                bgColor={"blue.main"}
+                bgColor={"green.main"}
                 onClick={onOpen}
             />
 
@@ -76,7 +76,7 @@ export const Messages = (
                         />
                         <CustomButton
                             icon={FaPaperPlane}
-                            bgColor={"blue.main"}
+                            bgColor={"green.main"}
                             iconColor={"white"}
                         />
                     </ModalFooter>

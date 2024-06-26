@@ -32,7 +32,7 @@ function Menu() {
                 <DrawerOverlay
                 />
                 <DrawerContent
-                    bg="blue.main"
+                    bg="green.main"
                     color="white"
                 >
                     <DrawerCloseButton/>
@@ -73,7 +73,7 @@ function MenuItem(
             textAlign="left"
             _hover={{
                 bg: "white",
-                color: "blue.main",
+                color: "green.main",
             }}
             onClick={() => {
                 // TODO change to router if need to be used in this project

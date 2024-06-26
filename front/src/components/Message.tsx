@@ -23,7 +23,7 @@ export const Message = (
     const isSent = message.type === 'sent';
     const isReceived = message.type === 'received';
     const isErrored = message.type === 'errored';
-    const stateColor = isErrored ? 'alert' : isSent ? 'blue.light' : 'blue.lightest';
+    const stateColor = isErrored ? 'alert' : isSent ? 'green.light' : 'blue.lightest';
     const hasAvatar = message.avatarName || message.avatarIcon;
 
     return (
