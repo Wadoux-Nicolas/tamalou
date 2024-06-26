@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+back/__pycache__/
+back/src/__pycache__/
+

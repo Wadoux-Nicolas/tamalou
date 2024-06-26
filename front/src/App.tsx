@@ -24,7 +24,6 @@ function App() {
                 >
                     <Center>
                         <PenguinComponent/>
-
                     </Center>
 
                     <PatientCard
