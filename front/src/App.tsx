@@ -28,7 +28,7 @@ function App() {
         <>
             <Flex align="center" justifyContent="space-between" h="100vh" flexDirection="column">
                 <Header/>
-                <Box alignSelf="flex-start" w="100vw">
+                <Box alignSelf="flex-start" w="100vw" p={4}>
                     <PatientCard patient={PatientMauriceDupont}/>
                 </Box>
                 <PenguinComponent/>
@@ -45,7 +45,7 @@ function App() {
                             {
                                 type: 'sent',
                                 content: 'Hello Maurice, how are you today?',
-                                avatarName: 'Maurice Dupont',
+                                avatarName: 'Maurice DUPONT',
                             },
                             {
                                 avatarIcon: FaHospitalUser,
@@ -57,7 +57,7 @@ function App() {
                                 content: 'No messages to display',
                             },
                             {
-                                avatarName: 'Maurice Dupont',
+                                avatarName: 'Maurice DUPONT',
                                 type: 'sent',
                                 outlined: true,
                                 content: 'Hello Maurice, how are you today?',
