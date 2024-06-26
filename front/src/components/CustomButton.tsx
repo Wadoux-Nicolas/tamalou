@@ -37,7 +37,7 @@ const CustomButton = forwardRef(({ icon, text, iconColor, bgColor, borderColor =
                 )}
                 <Icon as={icon} color={iconColor} boxSize="30px" />
             </Box>
-            {text && <Text fontSize="0.8rem" textAlign="center">{text}</Text>}
+            {text && <Text fontSize="0.8rem" mt={"2"} textAlign="center">{text}</Text>}
         </Box>
     );
 });

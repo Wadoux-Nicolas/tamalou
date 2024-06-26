@@ -3,7 +3,8 @@ import PatientCard from "./components/PatientCard.tsx";
 import { Box, Flex } from "@chakra-ui/react";
 import { PatientMauriceDupont } from "./mocks/patient.ts";
 import CustomButton from "./components/CustomButton.tsx";
-import { FaBandAid, FaPills, FaUtensils, FaDumbbell, FaMoon } from "react-icons/fa";
+import {FaBandAid, FaPills, FaUtensils, FaDumbbell, FaMoon, FaPhone} from "react-icons/fa";
+import {FaMessage} from "react-icons/fa6";
 
 function App() {
     return (
@@ -15,7 +16,7 @@ function App() {
                 flexDirection="column"
             >
                 <Header />
-                <Box alignSelf={"flex-start"} maxW="800px" p="8">
+                <Box alignSelf={"flex-start"} p="8" w={"100vw"}>
                     <PatientCard patient={PatientMauriceDupont} />
                 </Box>
                 <Box>
@@ -41,7 +42,7 @@ function App() {
                         </Flex>
                     </Flex>
                     <Flex justifyContent="center">
-                        <Flex justify="space-evenly" gap={6} maxW="600px" width="100%">
+                        <Flex justify="space-evenly" maxW="600px" width="100%">
                             <CustomButton
                                 icon={FaDumbbell}
                                 text="Exercice"
@@ -57,6 +58,18 @@ function App() {
                         </Flex>
                     </Flex>
                 </Box>
+                <Flex alignSelf={"flex-end"} flexDirection="column" p={"4"} gap={"2"}>
+                    <CustomButton
+                        icon={FaPhone}
+                        iconColor={"white"}
+                        bgColor={"alert"}
+                    />
+                    <CustomButton
+                        icon={FaMessage}
+                        iconColor={"white"}
+                        bgColor={"blue.main"}
+                    />
+                </Flex>
             </Flex>
         </>
     );
