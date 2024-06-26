@@ -121,6 +121,7 @@ export const Messages = (
                             resize={'none'}
                             ref={initialRef}
                             handleInputChange={(e) => setNewMessage(e.target.value)}
+                            value={newMessage}
                         />
 
                         {sending &&
