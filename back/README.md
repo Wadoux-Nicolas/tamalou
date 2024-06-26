@@ -4,6 +4,9 @@
 
 2. Créer un environnement virtuel pour installer les dépendances :
    ```shell
+   cd back
+   ```
+   ```shell
    python -m venv venv
    ```
 
