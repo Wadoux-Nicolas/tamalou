@@ -1,20 +1,21 @@
-import {ChangeEventHandler} from "react";
+import {ChangeEventHandler, ForwardedRef, forwardRef} from "react";
 import {ResponsiveValue, Textarea} from "@chakra-ui/react";
 
-export const TextInput = (
+export const TextInput = forwardRef((
     {
         value,
         placeholder,
         handleInputChange,
         size = 'sm',
-        resize = undefined
+        resize = undefined,
     }: {
         value?: string,
         placeholder?: string,
         handleInputChange?: ChangeEventHandler<HTMLTextAreaElement>
         size?: ResponsiveValue<string>
-        resize?: 'none' | 'horizontal' | 'vertical' | undefined
-    }
+        resize?: 'none' | 'horizontal' | 'vertical' | undefined,
+    },
+    ref: ForwardedRef<HTMLTextAreaElement>
 ) => {
     return (
         <>
@@ -26,7 +27,8 @@ export const TextInput = (
                 resize={resize}
                 borderRadius={12}
                 p={4}
+                ref={ref}
             />
         </>
     )
-}
+})

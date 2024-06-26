@@ -32,10 +32,13 @@ const PenguinComponent = () => {
                 top="0px"
                 left="0px"
             >
-                <Message message={{
-                    content: "Salut !",
-                    type: "sent-outlined",
-                }}/>
+                <Message
+                    outlined={true}
+                    message={{
+                        content: "Salut !",
+                        type: "sent",
+                    }}
+                />
             </Box>
         </Flex>
     );

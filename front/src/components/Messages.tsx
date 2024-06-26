@@ -1,5 +1,4 @@
 import {
-    Button,
     Modal, ModalBody,
     ModalCloseButton,
     ModalContent, ModalFooter,
@@ -7,7 +6,7 @@ import {
     ModalOverlay,
     useDisclosure
 } from "@chakra-ui/react";
-import {useRef} from "react";
+import {MutableRefObject, useRef} from "react";
 import {Message, MessageProps} from "./Message.tsx";
 import {TextInput} from "./TextInput.tsx";
 import CustomButton from "./CustomButton.tsx";
@@ -15,9 +14,9 @@ import {FaMessage} from "react-icons/fa6";
 import {FaPaperPlane} from "react-icons/fa";
 
 export const Messages = (
-    {messages}: { messages: MessageProps[] }
+    {messages}: { messages: MessagesPropsConfig[] }
 ) => {
-    const btnRef = useRef(null)
+    const initialRef: MutableRefObject<HTMLTextAreaElement | null> = useRef(null)
     const {isOpen, onOpen, onClose} = useDisclosure()
 
     return (
@@ -31,7 +30,7 @@ export const Messages = (
 
             <Modal
                 onClose={onClose}
-                finalFocusRef={btnRef}
+                initialFocusRef={initialRef}
                 isOpen={isOpen}
                 scrollBehavior="inside"
                 size="full"
@@ -46,10 +45,16 @@ export const Messages = (
                                 <Message
                                     key={index}
                                     message={message}
+                                    outlined={message.outlined}
+                                    borderRadius={message.borderRadius}
+                                    border={message.border}
+                                    m={message.m}
+                                    p={message.p}
                                     otherBoxProps={{
                                         maxW: '80%',
                                         mr: message.type === 'received' ? 'auto' : 0,
-                                        ml: message.type !== 'received' ? 'auto' : 0
+                                        ml: message.type !== 'received' ? 'auto' : 0,
+                                        ...message.otherBoxProps
                                     }}
                                 />
                             ))
@@ -64,15 +69,10 @@ export const Messages = (
                     <ModalFooter
                         gap={8}
                     >
-                        <Button
-                            onClick={onClose}
-                            mr={24}
-                        >
-                            Annuler
-                        </Button>
                         <TextInput
                             placeholder='Ecrire un message'
                             resize={'none'}
+                            ref={initialRef}
                         />
                         <CustomButton
                             icon={FaPaperPlane}
@@ -84,4 +84,13 @@ export const Messages = (
             </Modal>
         </div>
     );
+}
+
+export interface MessagesPropsConfig extends MessageProps {
+    outlined?: boolean;
+    borderRadius?: number;
+    border?: string;
+    m?: number;
+    p?: number;
+    otherBoxProps?: Record<string, unknown>;
 }

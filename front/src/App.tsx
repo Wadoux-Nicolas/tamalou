@@ -5,7 +5,7 @@ import {Box, Center, Flex} from "@chakra-ui/react";
 import {PatientMauriceDupont} from "./mocks/patient.ts";
 import {Messages} from "./components/Messages.tsx";
 import CustomButton from "./components/CustomButton.tsx";
-import {FaBandAid, FaPills, FaUtensils, FaDumbbell, FaMoon, FaPhone} from "react-icons/fa";
+import {FaBandAid, FaPills, FaUtensils, FaDumbbell, FaMoon, FaPhone, FaHospitalUser} from "react-icons/fa";
 
 function App() {
     return (
@@ -81,15 +81,37 @@ function App() {
                     />
                     <Messages
                         messages={[
-                            {type: 'sent', content: 'Hello Maurice, how are you today?'},
                             {
+                                type: 'sent',
+                                content: 'Hello Maurice, how are you today?',
+                                avatarName: 'Maurice Dupont',
+                            },
+                            {
+                                avatarIcon: FaHospitalUser,
                                 type: 'received',
                                 content: 'Hello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank you'
                             },
-                            {type: 'errored', content: 'No messages to display'},
-                            {type: 'sent-outlined', content: 'Hello Maurice, how are you today?'},
-                            {type: 'received-outlined', content: 'Hello, I am fine, thank you'},
-                            {type: 'errored-outlined', content: 'No messages to display'},
+                            {
+                                type: 'errored',
+                                content: 'No messages to display',
+                            },
+                            {
+                                avatarName: 'Maurice Dupont',
+                                type: 'sent',
+                                outlined: true,
+                                content: 'Hello Maurice, how are you today?',
+                            },
+                            {
+                                avatarIcon: FaHospitalUser,
+                                type: 'received',
+                                outlined: true,
+                                content: 'Hello, I am fine, thank you',
+                            },
+                            {
+                                type: 'errored',
+                                outlined: true,
+                                content: 'No messages to display',
+                            },
                         ]}
                     />
                 </Flex>

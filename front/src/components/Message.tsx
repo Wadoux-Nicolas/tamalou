@@ -1,4 +1,5 @@
-import {Alert, AlertIcon, Box} from "@chakra-ui/react";
+import {Alert, AlertIcon, Avatar, Box, Icon} from "@chakra-ui/react";
+import {IconType} from "react-icons";
 
 export const Message = (
     {
@@ -7,51 +8,79 @@ export const Message = (
         border = '2px solid',
         m = 4,
         p = 4,
-        otherBoxProps
+        outlined = false,
+        otherBoxProps,
     }: {
         message: MessageProps,
         borderRadius?: number
         border?: string,
         m?: number,
         p?: number,
+        outlined?: boolean,
         otherBoxProps?: Record<string, unknown>
     }
 ) => {
-    const isSent = message.type === 'sent' || message.type === 'sent-outlined';
-    const isReceived = message.type === 'received' || message.type === 'received-outlined';
-    const isErrored = message.type === 'errored' || message.type === 'errored-outlined';
-    const isOutlined = message.type === 'sent-outlined' || message.type === 'received-outlined' || message.type === 'errored-outlined';
+    const isSent = message.type === 'sent';
+    const isReceived = message.type === 'received';
+    const isErrored = message.type === 'errored';
     const stateColor = isErrored ? 'alert' : isSent ? 'blue.light' : 'blue.lightest';
+    const hasAvatar = message.avatarName || message.avatarIcon;
 
     return (
         <Box
+            display="flex"
             m={m}
-            p={p}
-            border={border}
-            borderColor={stateColor}
-            borderRadius={borderRadius}
-            borderBottomLeftRadius={isReceived ? 0 : borderRadius}
-            borderBottomRightRadius={isSent ? 0 : borderRadius}
-            bgColor={isOutlined ? 'white' : stateColor}
-            color={isErrored ? 'alert' : undefined}
-            {...otherBoxProps}
         >
-            {isErrored &&
-                <Alert
-                    p="0"
-                    status='error'
-                    bgColor={isOutlined ? 'white' : 'alert'}
-                    color={isOutlined ? 'alert' : 'white'}
-                >
-                    <AlertIcon
-                        color={isOutlined ? 'alert' : 'white'}
-                    />
-                    {message.content}
-                </Alert>
+            {isReceived && hasAvatar &&
+                <Avatar
+                    size='md'
+                    name={message.avatarName}
+                    icon={<Icon as={message.avatarIcon}/>}
+                    mr={4}
+                    bgColor={stateColor}
+                    color="black"
+
+                />
             }
 
-            {!isErrored &&
-                message.content
+            <Box
+                p={p}
+                border={border}
+                borderColor={stateColor}
+                borderRadius={borderRadius}
+                borderBottomLeftRadius={isReceived ? 0 : borderRadius}
+                borderBottomRightRadius={isSent ? 0 : borderRadius}
+                bgColor={outlined ? 'white' : stateColor}
+                color={isErrored ? 'alert' : undefined}
+                {...otherBoxProps}
+            >
+                {isErrored &&
+                    <Alert
+                        p="0"
+                        status='error'
+                        bgColor={outlined ? 'white' : 'alert'}
+                        color={outlined ? 'alert' : 'white'}
+                    >
+                        <AlertIcon
+                            color={outlined ? 'alert' : 'white'}
+                        />
+                        {message.content}
+                    </Alert>
+                }
+
+                {!isErrored &&
+                    message.content
+                }
+            </Box>
+
+            {isSent && hasAvatar &&
+                <Avatar
+                    size='md'
+                    name={message.avatarName}
+                    icon={<Icon as={message.avatarIcon}/>}
+                    ml={4}
+                    bgColor={stateColor}
+                />
             }
         </Box>
     );
@@ -60,6 +89,8 @@ export const Message = (
 export type MessageProps = {
     type: MessageType;
     content: string;
+    avatarName?: string;
+    avatarIcon?: IconType;
 }
 
-export type MessageType = 'sent' | 'received' | 'errored' | 'sent-outlined' | 'received-outlined' | 'errored-outlined';
+export type MessageType = 'sent' | 'received' | 'errored';
