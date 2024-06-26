@@ -22,6 +22,11 @@ const fonts = {
 const theme = extendTheme({ colors, fonts })
 
 const rootElement = document.getElementById('root')
+
+if (!rootElement) {
+    throw new Error('No element with id root found')
+}
+
 ReactDOM.createRoot(rootElement).render(
     <React.StrictMode>
         <ChakraProvider theme={theme}>

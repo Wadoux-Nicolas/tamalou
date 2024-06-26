@@ -1,12 +1,23 @@
 import "./App.css";
-import MenuBurger from "./MenuBurger.tsx";
+import Header from "./components/Header.tsx";
+import PatientCard from "./components/PatientCard.tsx";
+import {Box} from "@chakra-ui/react";
+import {PatientMauriceDupont} from "./mocks/patient.ts";
 import CustomButton from "./assets/CustomButton.tsx";
 import {FaBandAid} from "react-icons/fa";
 
 function App() {
-
   return (
     <>
+        <Header/>
+        <Box
+            maxW='800px'
+            p='8'
+        >
+            <PatientCard
+                patient={PatientMauriceDupont}
+            />
+        </Box>
         <CustomButton
             icon={FaBandAid}
             text="Pansements"
@@ -18,7 +29,6 @@ function App() {
             bgColor={"alert"}
             iconColor={"white"}
         />
-        <MenuBurger />
     </>
   );
 }
