@@ -1,6 +1,17 @@
 import CustomButton from './CustomButton';
+import { IconType } from "react-icons";
 
-const SlideButton = ({ icon, text, iconColor, bgColor, borderColor, badgeContent, onToggle }) => {
+type Props = {
+    icon: IconType,
+    bgColor: string,
+    text: string,
+    badgeContent: number
+    onToggle: ( ) => void
+    borderColor: string
+    iconColor?: string
+}
+
+const SlideButton = ({ icon, text, iconColor, bgColor, borderColor, badgeContent, onToggle }: Props) => {
     return (
         <CustomButton
             icon={icon}

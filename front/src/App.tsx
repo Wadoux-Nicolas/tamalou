@@ -13,7 +13,7 @@ import {StatePenguin} from "./components/StatePenguin.tsx";
 
 function App() {
     const {isOpen, onOpen, onClose} = useDisclosure();
-    const [content, setContent] = useState({});
+    const [content, setContent] = useState<{icon: IconType, title: string, description: string} | null>(null);
 
     const handleButtonClick = (icon: IconType, title: string, description: string) => {
         setContent({icon, title, description});
