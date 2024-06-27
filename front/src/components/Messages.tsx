@@ -14,6 +14,7 @@ import {TextInput} from "./TextInput.tsx";
 import CustomButton from "./CustomButton.tsx";
 import {FaMessage} from "react-icons/fa6";
 import {FaPaperPlane} from "react-icons/fa";
+import {parseMessage} from "../models/message.ts";
 
 export const Messages = (
     {messages}: { messages: MessagesPropsConfig[] }
@@ -24,11 +25,13 @@ export const Messages = (
     const [sendingFailed, setSendingFailed] = useState(false)
     const [sending, setSending] = useState(false)
     const bodyRef = useRef<HTMLDivElement>(null);
+    const [notFetchedMessages, setNotFetchedMessages] = useState<MessagesPropsConfig[]>([]);
 
     useEffect(() => {
         if (bodyRef.current) {
             bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
         }
+        setNotFetchedMessages([]);
     }, [messages]);
 
     const submitMessage = () => {
@@ -45,13 +48,16 @@ export const Messages = (
             },
             body: JSON.stringify({
                 input: newMessage,
-                role: "user",
-                shouldBeAnalyzed: true
+                role: "patient",
+                should_be_analyzed: true
             }),
         })
             .then(response => response.json())
-            .then(() => {
+            .then((message) => {
                 setNewMessage('')
+                setNotFetchedMessages((prevMessages) => {
+                    return [...prevMessages, parseMessage(message)]
+                })
             })
             .catch(() => {
                 setSendingFailed(true)
@@ -83,7 +89,7 @@ export const Messages = (
                     <ModalCloseButton/>
                     <ModalBody ref={bodyRef}>
                         {
-                            messages.map((message, index) => (
+                            [...messages, ...notFetchedMessages].map((message, index) => (
                                 <Message
                                     key={index}
                                     message={message}
@@ -103,7 +109,7 @@ export const Messages = (
                             ))
                         }
 
-                        {messages.length === 0 &&
+                        {messages.length === 0 && notFetchedMessages.length === 0 &&
                             <Text>Aucun message à afficher</Text>
                         }
 

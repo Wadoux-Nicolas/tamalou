@@ -35,7 +35,6 @@ def post_message(input_request: InputRequest):
         content=input_request.input,
         role=input_request.role,
         should_be_analyzed=input_request.should_be_analyzed,
-        date=datetime.now(),
     )
 
     messages.append(message)

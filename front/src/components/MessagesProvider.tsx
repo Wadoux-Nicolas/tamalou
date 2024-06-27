@@ -1,8 +1,7 @@
 import {createContext, ReactNode, useContext, useEffect, useState} from "react";
 import {Messages} from "./Messages.tsx";
 import {MessageProps} from "./Message.tsx";
-import {FaHospitalUser} from "react-icons/fa";
-import {PenguinStateByName} from "./Penguin.tsx";
+import {parseMessages} from "../models/message.ts";
 
 export const MessageContext = createContext<MessageProps[]>([]);
 
@@ -22,33 +21,34 @@ export const MessagesProvider = (
     }
 ) => {
     const [messages, setMessages] = useState<MessageProps[]>([]);
+    let lastFetch: Date | null = null;
 
     const fetchMessages = () => {
-        // todo to delete
-        const enumValues = Object.values(PenguinStateByName);
-        const randomIndex = Math.floor(Math.random() * enumValues.length);
-        const randomPenguinState = enumValues[randomIndex];
+        let url = 'http://localhost:8000/messages';
+        if (lastFetch !== null) {
+            url += '?date=' + lastFetch.toISOString().split('.')[0];
+        }
 
-        const randomMessages: MessageProps[] = [
+        fetch(
+            url,
             {
-                type: 'sent',
-                content: 'Hello Maurice, how are you today?',
-                avatarName: 'Maurice Dupont',
-                state: randomPenguinState
-            },
-            {
-                type: 'received',
-                content: 'Hello Maurice, how are you today?',
-                avatarIcon: FaHospitalUser,
-            },
-        ];
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        )
+            .then(r => r.json())
+            .then((data) => {
+                setMessages((prevMessages) => [...prevMessages, ...parseMessages(data)]);
+                lastFetch = new Date();
+            })
 
-        setMessages((prevMessages) => [...prevMessages, ...randomMessages]);
-
-        return setTimeout(fetchMessages, 5000);
+        return setTimeout(fetchMessages, 3000);
     };
 
     useEffect(() => {
+        // 2 calls are made to fetchMessages() in the first render in development mode
         const timeOut = fetchMessages();
 
         return () => clearTimeout(timeOut);
