@@ -1,7 +1,11 @@
-from fastapi import FastAPI
+from datetime import datetime
+from typing import Optional
+
+from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 from langchain_core.documents.base import Document
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
+from pydantic import Field
 
 from src.chain import create_chain
 from src.message import Message
@@ -28,9 +32,10 @@ class InputRequest(BaseModel):
 @app.post("/message")
 def post_message(input_request: InputRequest):
     message = Message(
-        input_request.input,
-        input_request.role,
-        input_request.should_be_analyzed,
+        content=input_request.input,
+        role=input_request.role,
+        should_be_analyzed=input_request.should_be_analyzed,
+        date=datetime.now(),
     )
 
     messages.append(message)
@@ -39,7 +44,10 @@ def post_message(input_request: InputRequest):
 
 
 @app.get("/messages")
-def get_messages():
+def get_messages(date: Optional[datetime] = Query(None)):
+    if date:
+        message_filter = [msg for msg in messages if msg.date.date() == date.date()]
+        return message_filter
     return messages
 
 
