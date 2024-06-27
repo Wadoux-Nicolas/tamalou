@@ -1,3 +1,4 @@
+import random
 from datetime import datetime
 from typing import Optional
 
@@ -60,3 +61,34 @@ def get_summary():
     docs = [Document(all_messages)]
     summary = chain.invoke(docs)["output_text"]
     return {"summary": summary}
+
+
+class Notification(BaseModel):
+    amount: int
+    content: str
+
+
+@app.get("/notifications")
+def get_notifications() -> dict[str, Notification]:
+    return {
+        "bandage": Notification(
+            amount=random.randint(0, 5),
+            content="Soignez vos blessures en appliquant soigneusement des pansements stériles sur les zones touchées. Assurez-vous de bien nettoyer et d'appliquer un peu de gel ou de crème pour aider la guérison.",
+        ),
+        "medication": Notification(
+            amount=random.randint(0, 5),
+            content="Prenez vos médicaments comme prescrits par votre médecin, en veillant à ne pas oublier de prendre une dose. Assurez-vous de lire les étiquettes et de demander des informations supplémentaires si vous avez des questions.",
+        ),
+        "meals": Notification(
+            amount=random.randint(0, 5),
+            content="Préparez vos repas avec soin en sélectionnant des aliments sains et variés. Assurez-vous d'avoir suffisamment de temps pour manger paisiblement et de ne pas oublier de boire régulièrement.",
+        ),
+        "exercise": Notification(
+            amount=random.randint(0, 5),
+            content="Faites de l'exercice régulièrement pour améliorer votre santé et votre bien-être. Choisissez des activités qui vous plaisent, comme la marche, le yoga ou le sport, et ajustez-y votre intensité en fonction de vos besoins.",
+        ),
+        "rest": Notification(
+            amount=random.randint(0, 5),
+            content="Donnez-vous du temps pour vous reposer et vous détendre. Profitez de moments de relaxation pour vous éloigner des écrans et des distractions, et laissez-vous aller dans un état de bien-être.",
+        ),
+    }
