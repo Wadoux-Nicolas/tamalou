@@ -6,11 +6,9 @@ classifier = None
 def classification(msg):
     global classifier
     if classifier is None:
-        print("Loading classifier")
         classifier = pipeline(
             "zero-shot-classification", model="mtheo/camembert-base-xnli"
         )
-        print("Classifier loaded!")
 
     candidate_labels = [
         "normal",
