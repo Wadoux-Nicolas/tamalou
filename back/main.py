@@ -58,4 +58,5 @@ def get_summary():
     )
 
     docs = [Document(all_messages)]
-    return chain.invoke(docs)
+    summary = chain.invoke(docs)["output_text"]
+    return {"summary": summary}
