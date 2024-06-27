@@ -7,7 +7,7 @@ def create_chain():
 
     llm = get_llm(model)
 
-    prompt_template = """Rédiger un résumé concis des éléments suivants :
+    prompt_template = """Rédige un résumé en une phrase de la conversation suivante comme si tu étais le patient :
 
 
 "{text}"
