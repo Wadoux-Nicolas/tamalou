@@ -1,16 +1,33 @@
-import { Link, Flex, Text } from "@chakra-ui/react";
+import {Link, Flex, Text, Image} from "@chakra-ui/react";
 import Menu from "./Menu.tsx";
+import Logo from "../assets/logo.png";
+import {ReactNode} from "react";
 
 const Header = () => {
     return (
         <NavBarContainer>
             <Menu/>
-            <MenuItem to="/">MemoGotchi</MenuItem>
+            <MenuItem to="/">
+                <Image
+                    src={Logo}
+                    alt="MemoHelp"
+                    h="20px"
+                    objectFit="cover"
+                />
+            </MenuItem>
         </NavBarContainer>
     );
 };
 
-const MenuItem = ({ children, to = "/" }) => {
+const MenuItem = (
+    {
+        children,
+        to = "/",
+    } : {
+        children: ReactNode,
+        to?: string,
+    }
+) => {
     return (
         <Link href={to}>
             <Text display="block">
@@ -20,7 +37,13 @@ const MenuItem = ({ children, to = "/" }) => {
     );
 };
 
-const NavBarContainer = ({ children, ...props }) => {
+const NavBarContainer = (
+    {
+        children,
+    }: {
+        children: ReactNode,
+    }
+) => {
     return (
         <Flex
             as="nav"
@@ -30,7 +53,6 @@ const NavBarContainer = ({ children, ...props }) => {
             w="100%"
             bg="green.main"
             color="white"
-            {...props}
         >
             {children}
         </Flex>

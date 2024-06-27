@@ -36,7 +36,7 @@ function Menu() {
                     color="white"
                 >
                     <DrawerCloseButton/>
-                    <DrawerHeader>MemoGotchi</DrawerHeader>
+                    <DrawerHeader>MemoHelp</DrawerHeader>
 
                     <DrawerBody>
                         <Box
