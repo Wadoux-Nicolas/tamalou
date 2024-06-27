@@ -7,7 +7,7 @@ import {PatientMauriceDupont} from './mocks/patient';
 import CustomButton from './components/CustomButton';
 import GroupInformationButtons from './components/GroupInformationsButtons';
 import SlideContent from './components/SlideContent';
-import PenguinComponent from "./components/Penguin.tsx"
+import PenguinComponent, {PenguinStateByName} from "./components/Penguin.tsx"
 import {IconType} from "react-icons";
 import {MessagesContextContainer, MessagesProvider} from "./components/MessagesProvider.tsx";
 
@@ -34,6 +34,7 @@ function App() {
                     <PatientCard patient={PatientMauriceDupont}/>
                 </Box>
                 <PenguinComponent/>
+
                 <Flex flexDirection="column">
                     <GroupInformationButtons handleButtonClick={handleButtonClick}/>
                     <Slide direction="bottom" in={isOpen} style={{zIndex: 10}}>
