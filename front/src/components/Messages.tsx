@@ -90,12 +90,13 @@ export const Messages = (
                                     outlined={message.outlined}
                                     borderRadius={message.borderRadius}
                                     border={message.border}
-                                    m={message.m}
+                                    my={message.my}
                                     p={message.p}
                                     otherBoxProps={{
-                                        maxW: '80%',
+                                        maxW: '65%',
                                         mr: message.type === 'received' ? 'auto' : 0,
                                         ml: message.type !== 'received' ? 'auto' : 0,
+                                        fontSize: '0.8rem',
                                         ...message.otherBoxProps
                                     }}
                                 />
@@ -114,7 +115,7 @@ export const Messages = (
                         }
                     </ModalBody>
                     <ModalFooter
-                        gap={8}
+                        gap={2}
                     >
                         <TextInput
                             placeholder='Ecrire un message'
@@ -122,6 +123,7 @@ export const Messages = (
                             ref={initialRef}
                             handleInputChange={(e) => setNewMessage(e.target.value)}
                             value={newMessage}
+                            focusBorderColor={"green.light"}
                         />
 
                         {sending &&
@@ -148,7 +150,7 @@ export interface MessagesPropsConfig extends MessageProps {
     outlined?: boolean;
     borderRadius?: number;
     border?: string;
-    m?: number;
+    my?: number;
     p?: number;
     otherBoxProps?: Record<string, unknown>;
 }

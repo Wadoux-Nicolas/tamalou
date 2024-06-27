@@ -5,17 +5,17 @@ import {PenguinStateByName} from "./Penguin.tsx";
 export const Message = (
     {
         message,
-        borderRadius = 16,
+        borderRadius = 10,
         border = '2px solid',
-        m = 4,
-        p = 4,
+        my = 4,
+        p = 2,
         outlined = false,
         otherBoxProps,
     }: {
         message: MessageProps,
         borderRadius?: number
         border?: string,
-        m?: number,
+        my?: number,
         p?: number,
         outlined?: boolean,
         otherBoxProps?: Record<string, unknown>
@@ -30,14 +30,14 @@ export const Message = (
     return (
         <Box
             display="flex"
-            m={m}
+            my={my}
         >
             {isReceived && hasAvatar &&
                 <Avatar
-                    size='md'
+                    size='sm'
                     name={message.avatarName}
                     icon={<Icon as={message.avatarIcon}/>}
-                    mr={4}
+                    mr={2}
                     bgColor={stateColor}
                     color="black"
                 />
@@ -48,10 +48,7 @@ export const Message = (
                 border={border}
                 borderColor={stateColor}
                 borderRadius={borderRadius}
-                borderBottomLeftRadius={isReceived ? 0 : borderRadius}
-                borderBottomRightRadius={isSent ? 0 : borderRadius}
                 bgColor={outlined ? 'white' : stateColor}
-                color={isErrored ? 'alert' : undefined}
                 {...otherBoxProps}
             >
                 {isErrored &&
@@ -72,16 +69,6 @@ export const Message = (
                     message.content
                 }
             </Box>
-
-            {isSent && hasAvatar &&
-                <Avatar
-                    size='md'
-                    name={message.avatarName}
-                    icon={<Icon as={message.avatarIcon}/>}
-                    ml={4}
-                    bgColor={stateColor}
-                />
-            }
         </Box>
     );
 }

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Flex } from '@chakra-ui/react';
 import { FaBandAid, FaPills, FaUtensils, FaDumbbell, FaMoon } from 'react-icons/fa';
 import SlideButton from './SlideButton';
@@ -9,6 +8,7 @@ const GroupInformationButtons = ({ handleButtonClick }) => {
             <Flex justifyContent="center" mb={6}>
                 <Flex justify="space-evenly" gap={12} maxW="800px" width="100%">
                     <SlideButton
+                        bgColor={"white"}
                         icon={FaBandAid}
                         text="Pansements"
                         badgeContent={1}
@@ -16,6 +16,7 @@ const GroupInformationButtons = ({ handleButtonClick }) => {
                         onToggle={() => handleButtonClick(FaBandAid, 'Pansements', 'Informations sur les pansements')}
                     />
                     <SlideButton
+                        bgColor={"white"}
                         icon={FaPills}
                         text="Médicaments"
                         badgeContent={1}
@@ -23,6 +24,7 @@ const GroupInformationButtons = ({ handleButtonClick }) => {
                         onToggle={() => handleButtonClick(FaPills, 'Médicaments', 'Informations sur les médicaments')}
                     />
                     <SlideButton
+                        bgColor={"white"}
                         icon={FaUtensils}
                         text="Repas"
                         borderColor={"green.main"}
@@ -33,6 +35,7 @@ const GroupInformationButtons = ({ handleButtonClick }) => {
             <Flex justifyContent="center">
                 <Flex justify="space-evenly" maxW="600px" width="100%">
                     <SlideButton
+                        bgColor={"white"}
                         icon={FaDumbbell}
                         text="Exercice"
                         badgeContent={1}
@@ -40,6 +43,7 @@ const GroupInformationButtons = ({ handleButtonClick }) => {
                         onToggle={() => handleButtonClick(FaDumbbell, 'Exercice', 'Informations sur les exercices')}
                     />
                     <SlideButton
+                        bgColor={"white"}
                         icon={FaMoon}
                         text="Repos"
                         badgeContent={1}
