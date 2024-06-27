@@ -1,7 +1,9 @@
-from fastapi import FastAPI
+from typing import Optional
+from fastapi import FastAPI,Query
 from fastapi.middleware.cors import CORSMiddleware
 from langserve import add_routes
 from pydantic import BaseModel
+from datetime import datetime
 
 from src.chain import create_chain
 from src.classification import classification
@@ -22,6 +24,7 @@ messages = []
 class InputRequest(BaseModel):
     input: str
     role: str
+    date: datetime
     shouldBeAnalyzed: bool
 
 @app.get("/")
@@ -36,13 +39,16 @@ def post_message(input_request: InputRequest):
     if input_request.shouldBeAnalyzed:
         output = classification(input_request.input)
 
-    messages.append({"message": input_request.input, "catégorie": output["labels"], "role": input_request.role})
+    messages.append({"message": input_request.input, "catégorie": output["labels"], "role": input_request.role, "date": datetime.now()})
+    print("Messages:", messages)
 
-    return {"input": input_request.input, "output": output, "role": input_request.role}
-
+    return {"input": input_request.input, "output": output, "role": input_request.role,"date": datetime.now()}
 
 @app.get("/messages")
-def get_messages():
+def get_messages(date: Optional[datetime] = Query(None)):
+    if date:
+        message_filter = [msg for msg in messages if msg['date'].date() == date.date()]
+        return message_filter
     return messages
 
 
