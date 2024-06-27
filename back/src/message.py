@@ -11,7 +11,11 @@ class Message:
     date: datetime
 
     def __init__(
-        self, content: str, role: str, should_be_analyzed: bool, date: datetime
+        self,
+        content: str,
+        role: str,
+        should_be_analyzed: bool,
+        date: datetime,
     ):
         self.content = content
         self.role = role

@@ -46,7 +46,7 @@ def post_message(input_request: InputRequest):
 @app.get("/messages")
 def get_messages(date: Optional[datetime] = Query(None)):
     if date:
-        message_filter = [msg for msg in messages if msg.date.date() == date.date()]
+        message_filter = [msg for msg in messages if msg.date >= date]
         return message_filter
     return messages
 
