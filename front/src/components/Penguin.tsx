@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import { Box, Center, Flex } from '@chakra-ui/react';
 import PenguinSVG from "../assets/penguins/normal.svg";
 import PenguinDiarrheaSVG from "../assets/penguins/diarrhea.svg";
@@ -15,6 +14,8 @@ import PenguinWaitingForCareSVG from "../assets/penguins/waiting_for_care.svg";
 import blobSVG from "../assets/blob.svg";
 import {Message} from "./Message.tsx";
 import {PenguinStateByName} from "../models/penguin_state.tsx";
+import {useContext} from "react";
+import {MessageContext} from "./MessagesProvider.tsx";
 
 const Penguin = (
     {
@@ -23,6 +24,8 @@ const Penguin = (
         state?: PenguinStateByName,
     }
 ) => {
+
+    const messagesAndSummary = useContext(MessageContext);
 
     const getSVG = () => {
         switch (state) {
@@ -77,7 +80,7 @@ const Penguin = (
                 <Message
                     outlined={true}
                     message={{
-                        content: "Salut !",
+                        content: messagesAndSummary.summary,
                         type: "sent",
                     }}
                 />

@@ -3,13 +3,17 @@ import {Messages} from "./Messages.tsx";
 import {MessageProps} from "./Message.tsx";
 import {parseMessages} from "../models/message.ts";
 
-export const MessageContext = createContext<MessageProps[]>([]);
+export interface MessagesAndSummary{
+    messages: MessageProps[];
+    summary: string;
+}
+export const MessageContext = createContext<MessagesAndSummary>({messages:[], summary:""});
 
 export const MessagesContextContainer = () => {
-    const messages = useContext(MessageContext);
+    const messagesAndSummary = useContext(MessageContext);
 
     return (
-        <Messages messages={messages}/>
+        <Messages messages={messagesAndSummary.messages}/>
     );
 }
 
@@ -21,7 +25,28 @@ export const MessagesProvider = (
     }
 ) => {
     const [messages, setMessages] = useState<MessageProps[]>([]);
+    const loadingMessage = "Chargement en cours..."
+    const [summary, setSummary] = useState<string>(loadingMessage);
     let lastFetch: Date | null = null;
+
+    const fetchSummary = () => {
+        let url = 'http://localhost:8000/summary';
+        setSummary(loadingMessage);
+
+        fetch(
+            url,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        )
+            .then(r => r.json())
+            .then((data) => {
+                setSummary(data);
+            })
+    };
 
     const fetchMessages = () => {
         let url = 'http://localhost:8000/messages';
@@ -40,8 +65,13 @@ export const MessagesProvider = (
         )
             .then(r => r.json())
             .then((data) => {
+                if (!data || data.length <= 0) {
+                    return;
+                }
+
                 setMessages((prevMessages) => [...prevMessages, ...parseMessages(data)]);
                 lastFetch = new Date();
+                fetchSummary()
             })
             .finally(() => {
                 setTimeout(fetchMessages, 3000);
@@ -58,7 +88,7 @@ export const MessagesProvider = (
     }, []);
 
     return (
-        <MessageContext.Provider value={messages}>
+        <MessageContext.Provider value={{messages, summary}}>
             {children}
         </MessageContext.Provider>
     );

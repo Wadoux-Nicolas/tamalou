@@ -4,7 +4,7 @@ import {MessageContext} from "./MessagesProvider.tsx";
 import {PenguinStateByName} from "../models/penguin_state.tsx";
 
 export const StatePenguin = () => {
-    const messages = useContext(MessageContext);
+    const messages = useContext(MessageContext).messages;
     const [state, setState] = useState<PenguinStateByName>(PenguinStateByName.NORMAL);
 
     useEffect(() => {
