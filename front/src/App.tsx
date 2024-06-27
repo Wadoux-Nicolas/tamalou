@@ -7,9 +7,9 @@ import {PatientMauriceDupont} from './mocks/patient';
 import CustomButton from './components/CustomButton';
 import GroupInformationButtons from './components/GroupInformationsButtons';
 import SlideContent from './components/SlideContent';
-import PenguinComponent from "./components/Penguin.tsx"
 import {IconType} from "react-icons";
 import {MessagesContextContainer, MessagesProvider} from "./components/MessagesProvider.tsx";
+import {StatePenguin} from "./components/StatePenguin.tsx";
 
 function App() {
     const {isOpen, onOpen, onClose} = useDisclosure();
@@ -28,25 +28,26 @@ function App() {
 
     return (
         <>
-            <Flex backgroundColor={"background"} align="center" justifyContent="space-between" h="100vh" flexDirection="column">
+            <Flex backgroundColor={"background"} align="center" justifyContent="space-between" h="100vh"
+                  flexDirection="column">
                 <Header/>
                 <Box alignSelf="flex-start" w="100vw" p={4}>
                     <PatientCard patient={PatientMauriceDupont}/>
                 </Box>
-                <PenguinComponent/>
+                <MessagesProvider>
+                    <StatePenguin/>
 
-                <Flex flexDirection="column">
-                    <GroupInformationButtons handleButtonClick={handleButtonClick}/>
-                    <Slide direction="bottom" in={isOpen} style={{zIndex: 10}}>
-                        <SlideContent content={content} closeSlide={closeSlide}/>
-                    </Slide>
-                </Flex>
-                <Flex alignSelf="flex-end" flexDirection="column" p="4" gap="2">
-                    <CustomButton icon={FaPhone} iconColor="white" bgColor="alert"/>
-                    <MessagesProvider>
+                    <Flex flexDirection="column">
+                        <GroupInformationButtons handleButtonClick={handleButtonClick}/>
+                        <Slide direction="bottom" in={isOpen} style={{zIndex: 10}}>
+                            <SlideContent content={content} closeSlide={closeSlide}/>
+                        </Slide>
+                    </Flex>
+                    <Flex alignSelf="flex-end" flexDirection="column" p="4" gap="2">
+                        <CustomButton icon={FaPhone} iconColor="white" bgColor="alert"/>
                         <MessagesContextContainer/>
-                    </MessagesProvider>
-                </Flex>
+                    </Flex>
+                </MessagesProvider>
             </Flex>
         </>
     );

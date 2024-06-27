@@ -2,8 +2,9 @@ import {createContext, ReactNode, useContext, useEffect, useState} from "react";
 import {Messages} from "./Messages.tsx";
 import {MessageProps} from "./Message.tsx";
 import {FaHospitalUser} from "react-icons/fa";
+import {PenguinStateByName} from "./Penguin.tsx";
 
-const MessageContext = createContext([]);
+export const MessageContext = createContext<MessageProps[]>([]);
 
 export const MessagesContextContainer = () => {
     const messages = useContext(MessageContext);
@@ -23,11 +24,17 @@ export const MessagesProvider = (
     const [messages, setMessages] = useState<MessageProps[]>([]);
 
     const fetchMessages = () => {
+        // todo to delete
+        const enumValues = Object.values(PenguinStateByName);
+        const randomIndex = Math.floor(Math.random() * enumValues.length);
+        const randomPenguinState = enumValues[randomIndex];
+
         const randomMessages: MessageProps[] = [
             {
                 type: 'sent',
                 content: 'Hello Maurice, how are you today?',
                 avatarName: 'Maurice Dupont',
+                state: randomPenguinState
             },
             {
                 type: 'received',

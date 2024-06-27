@@ -1,5 +1,6 @@
 import {Alert, AlertIcon, Avatar, Box, Icon} from "@chakra-ui/react";
 import {IconType} from "react-icons";
+import {PenguinStateByName} from "./Penguin.tsx";
 
 export const Message = (
     {
@@ -90,6 +91,7 @@ export type MessageProps = {
     content: string;
     avatarName?: string;
     avatarIcon?: IconType;
+    state?: PenguinStateByName;
 }
 
 export type MessageType = 'sent' | 'received' | 'errored';
