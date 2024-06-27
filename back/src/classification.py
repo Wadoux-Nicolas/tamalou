@@ -29,4 +29,4 @@ def classification(msg):
     top_label = result["labels"][0]
     top_score = result["scores"][0]
 
-    return {"labels": top_label, "scores": top_score}
+    return {"label": top_label, "score": top_score}
