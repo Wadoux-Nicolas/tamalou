@@ -13,7 +13,7 @@ import {StatePenguin} from "./components/StatePenguin.tsx";
 
 function App() {
     const {isOpen, onOpen, onClose} = useDisclosure();
-    const [content, setContent] = useState({});
+    const [content, setContent] = useState<{ icon: IconType, title: string, description: string } | null>(null);
 
     const handleButtonClick = (icon: IconType, title: string, description: string) => {
         setContent({icon, title, description});
@@ -28,7 +28,7 @@ function App() {
 
     return (
         <>
-            <Flex backgroundColor={"background"} align="center" justifyContent="space-between" h="100vh"
+            <Flex backgroundColor={"background"} align="center" justifyContent="flex-start" gap="4" h="100%" minH="100vh"
                   flexDirection="column">
                 <Header/>
                 <Box w="100vw" maxW="800px" p={4}>
@@ -37,13 +37,14 @@ function App() {
                 <MessagesProvider>
                     <StatePenguin/>
 
-                    <Flex flexDirection="column">
+                    <Flex flexDirection="column" pb="16">
                         <GroupInformationButtons handleButtonClick={handleButtonClick}/>
                         <Slide direction="bottom" in={isOpen} style={{zIndex: 10}}>
                             <SlideContent content={content} closeSlide={closeSlide}/>
                         </Slide>
                     </Flex>
-                    <Flex alignSelf="flex-end" flexDirection="column" p="4" gap="2">
+
+                    <Flex alignSelf="flex-end" flexDirection="column" p="4" gap="2" position="fixed" bottom="0" right="0">
                         <CustomButton icon={FaPhone} iconColor="white" bgColor="alert"/>
                         <MessagesContextContainer/>
                     </Flex>

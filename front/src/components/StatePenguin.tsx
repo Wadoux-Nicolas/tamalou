@@ -1,6 +1,7 @@
-import Penguin, {PenguinStateByName} from "./Penguin.tsx";
+import Penguin from "./Penguin.tsx";
 import {useContext, useEffect, useState} from "react";
 import {MessageContext} from "./MessagesProvider.tsx";
+import {PenguinStateByName} from "../models/penguin_state.tsx";
 
 export const StatePenguin = () => {
     const messages = useContext(MessageContext);

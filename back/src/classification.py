@@ -13,7 +13,7 @@ def classification(msg):
     candidate_labels = [
         "normal",
         "diarrhé",
-        "alerte",
+#         "alerte", # removed cause it was trigger too often
         "sueur",
         "fievreux",
         "saignement",

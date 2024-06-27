@@ -14,6 +14,7 @@ import PenguinWaitingForCareSVG from "../assets/penguins/waiting_for_care.svg";
 
 import blobSVG from "../assets/blob.svg";
 import {Message} from "./Message.tsx";
+import {PenguinStateByName} from "../models/penguin_state.tsx";
 
 const Penguin = (
     {
@@ -86,17 +87,3 @@ const Penguin = (
 };
 
 export default Penguin;
-
-export enum PenguinStateByName {
-    NORMAL = 'normal',
-    DIARRHEA = 'diarrhé',
-    ALERT = 'alerte',
-    SWEATY = 'sueur',
-    FEVERISH = 'fievreux',
-    BLEEDING = 'saignement',
-    VOMITING = 'vomissements',
-    FATIGUE = 'fatigue',
-    DEPRESSION = 'depression',
-    PAIN = 'douleur',
-    WAITING_FOR_CARE = 'en_attente_de_soins',
-}

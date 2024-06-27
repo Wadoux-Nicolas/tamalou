@@ -1,8 +1,38 @@
 import { Flex } from '@chakra-ui/react';
 import { FaBandAid, FaPills, FaUtensils, FaDumbbell, FaMoon } from 'react-icons/fa';
 import SlideButton from './SlideButton';
+import { useEffect, useState } from "react";
+import { IconType } from "react-icons";
 
-const GroupInformationButtons = ({ handleButtonClick }) => {
+type NotificationCategory = "bandage" | "medication" | "meals" | "exercise" | "rest";
+
+const useNotification = () => {
+    const [notifications, setNotifications] = useState<Record<string, {amount: number, content: string}>>({})
+
+    useEffect(() => {
+        fetch('http://localhost:8000/notifications', {
+            method: 'GET',
+
+
+        })
+          .then(response => response.json())
+          .then(setNotifications)
+
+    }, [])
+
+    return {
+        getCount: (category: NotificationCategory): number => notifications[category]?.amount ?? 0,
+        getDescription: (category: NotificationCategory): string => notifications[category]?.content ?? ""
+    };
+}
+
+type Props = {
+    handleButtonClick: (icon: IconType, title: string, description: string) => void
+}
+
+const GroupInformationButtons = ({ handleButtonClick }: Props) => {
+    const notifs = useNotification()
+
     return (
         <>
             <Flex justifyContent="center" mb={6}>
@@ -11,24 +41,25 @@ const GroupInformationButtons = ({ handleButtonClick }) => {
                         bgColor={"white"}
                         icon={FaBandAid}
                         text="Pansements"
-                        badgeContent={1}
+                        badgeContent={notifs.getCount("bandage")}
                         borderColor={"green.main"}
-                        onToggle={() => handleButtonClick(FaBandAid, 'Pansements', 'Informations sur les pansements')}
+                        onToggle={() => handleButtonClick(FaBandAid, 'Pansements', notifs.getDescription("bandage"))}
                     />
                     <SlideButton
                         bgColor={"white"}
                         icon={FaPills}
                         text="Médicaments"
-                        badgeContent={1}
+                        badgeContent={notifs.getCount("medication")}
                         borderColor={"green.main"}
-                        onToggle={() => handleButtonClick(FaPills, 'Médicaments', 'Informations sur les médicaments')}
+                        onToggle={() => handleButtonClick(FaPills, 'Médicaments', notifs.getDescription("medication"))}
                     />
                     <SlideButton
                         bgColor={"white"}
                         icon={FaUtensils}
                         text="Repas"
+                        badgeContent={notifs.getCount("meals")}
                         borderColor={"green.main"}
-                        onToggle={() => handleButtonClick(FaUtensils, 'Repas', 'Informations sur les repas')}
+                        onToggle={() => handleButtonClick(FaUtensils, 'Repas', notifs.getDescription("meals"))}
                     />
                 </Flex>
             </Flex>
@@ -38,17 +69,17 @@ const GroupInformationButtons = ({ handleButtonClick }) => {
                         bgColor={"white"}
                         icon={FaDumbbell}
                         text="Exercice"
-                        badgeContent={1}
+                        badgeContent={notifs.getCount("exercise")}
                         borderColor={"green.main"}
-                        onToggle={() => handleButtonClick(FaDumbbell, 'Exercice', 'Informations sur les exercices')}
+                        onToggle={() => handleButtonClick(FaDumbbell, 'Exercice', notifs.getDescription("exercise"))}
                     />
                     <SlideButton
                         bgColor={"white"}
                         icon={FaMoon}
                         text="Repos"
-                        badgeContent={1}
+                        badgeContent={notifs.getCount("rest")}
                         borderColor={"green.main"}
-                        onToggle={() => handleButtonClick(FaMoon, 'Repos', 'Informations sur le repos')}
+                        onToggle={() => handleButtonClick(FaMoon, 'Repos', notifs.getDescription("rest"))}
                     />
                 </Flex>
             </Flex>
