@@ -1,4 +1,4 @@
-import {createContext, ReactNode, useContext, useEffect, useState} from "react";
+import {createContext, MutableRefObject, ReactNode, useContext, useEffect, useRef, useState} from "react";
 import {Messages} from "./Messages.tsx";
 import {MessageProps} from "./Message.tsx";
 import {parseMessages} from "../models/message.ts";
@@ -43,15 +43,18 @@ export const MessagesProvider = (
                 setMessages((prevMessages) => [...prevMessages, ...parseMessages(data)]);
                 lastFetch = new Date();
             })
-
-        return setTimeout(fetchMessages, 3000);
+            .finally(() => {
+                setTimeout(fetchMessages, 3000);
+            });
     };
 
     useEffect(() => {
         // 2 calls are made to fetchMessages() in the first render in development mode
-        const timeOut = fetchMessages();
+        const timeout = setTimeout(fetchMessages, 0);
 
-        return () => clearTimeout(timeOut);
+        return () => {
+            clearTimeout(timeout)
+        };
     }, []);
 
     return (
