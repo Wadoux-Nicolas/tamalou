@@ -6,5 +6,5 @@ langchain_openai
 langchain_community
 langserve[all]~=0.2.2
 sse_starlette
-pydantic==1.10.13
+pydantic
 starlette~=0.37.2

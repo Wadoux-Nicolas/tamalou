@@ -1,12 +1,18 @@
-from fastapi import FastAPI
+from datetime import datetime
+from typing import Optional
+
+from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
-from langserve import add_routes
+from langchain_core.documents.base import Document
 from pydantic import BaseModel
+from pydantic import Field
 
 from src.chain import create_chain
-from src.classification import classification
+from src.message import Message
 
 app = FastAPI()
+messages: list[Message] = []
+chain = create_chain()
 
 app.add_middleware(
     CORSMiddleware,
@@ -16,34 +22,40 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-messages = []
-
 
 class InputRequest(BaseModel):
-    input: str
-    role: str
-    shouldBeAnalyzed: bool
-
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
+    input: str = Field(min_length=1)
+    role: str = Field(min_length=1)
+    should_be_analyzed: bool
 
 
 @app.post("/message")
 def post_message(input_request: InputRequest):
-    output = {"labels": "none"}
+    message = Message(
+        content=input_request.input,
+        role=input_request.role,
+        should_be_analyzed=input_request.should_be_analyzed,
+        date=datetime.now(),
+    )
 
-    if input_request.shouldBeAnalyzed:
-        output = classification(input_request.input)
+    messages.append(message)
 
-    messages.append({"message": input_request.input, "catégorie": output["labels"], "role": input_request.role})
-
-    return {"input": input_request.input, "output": output, "role": input_request.role}
+    return message
 
 
 @app.get("/messages")
-def get_messages():
+def get_messages(date: Optional[datetime] = Query(None)):
+    if date:
+        message_filter = [msg for msg in messages if msg.date >= date]
+        return message_filter
     return messages
 
 
-add_routes(app, create_chain())
+@app.get("/summary")
+def get_summary():
+    all_messages = "\n".join(
+        [f"{message.role}: {message.content}" for message in messages]
+    )
+
+    docs = [Document(all_messages)]
+    return chain.invoke(docs)
