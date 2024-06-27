@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {Box, Flex, Slide, useDisclosure} from '@chakra-ui/react';
-import {FaHospitalUser, FaPhone} from 'react-icons/fa';
+import {FaPhone} from 'react-icons/fa';
 import Header from './components/Header';
 import PatientCard from './components/PatientCard';
 import {PatientMauriceDupont} from './mocks/patient';
@@ -8,8 +8,8 @@ import CustomButton from './components/CustomButton';
 import GroupInformationButtons from './components/GroupInformationsButtons';
 import SlideContent from './components/SlideContent';
 import PenguinComponent from "./components/Penguin.tsx"
-import {Messages} from "./components/Messages.tsx";
 import {IconType} from "react-icons";
+import {MessagesContextContainer, MessagesProvider} from "./components/MessagesProvider.tsx";
 
 function App() {
     const {isOpen, onOpen, onClose} = useDisclosure();
@@ -34,6 +34,7 @@ function App() {
                     <PatientCard patient={PatientMauriceDupont}/>
                 </Box>
                 <PenguinComponent/>
+
                 <Flex flexDirection="column">
                     <GroupInformationButtons handleButtonClick={handleButtonClick}/>
                     <Slide direction="bottom" in={isOpen} style={{zIndex: 10}}>
@@ -42,23 +43,9 @@ function App() {
                 </Flex>
                 <Flex alignSelf="flex-end" flexDirection="column" p="4" gap="2">
                     <CustomButton icon={FaPhone} iconColor="white" bgColor="alert"/>
-                    <Messages
-                        messages={[
-                            {
-                                type: 'sent',
-                                content: 'Hello Maurice, how are you today?',
-                            },
-                            {
-                                avatarIcon: FaHospitalUser,
-                                type: 'received',
-                                content: 'Hello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank youHello, I am fine, thank you'
-                            },
-                            {
-                                type: 'errored',
-                                content: 'No messages to display',
-                            }
-                        ]}
-                    />
+                    <MessagesProvider>
+                        <MessagesContextContainer/>
+                    </MessagesProvider>
                 </Flex>
             </Flex>
         </>
