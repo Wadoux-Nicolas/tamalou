@@ -1,4 +1,4 @@
-import {createContext, MutableRefObject, ReactNode, useContext, useEffect, useRef, useState} from "react";
+import {createContext, ReactNode, useContext, useEffect, useState} from "react";
 import {Messages} from "./Messages.tsx";
 import {MessageProps} from "./Message.tsx";
 import {parseMessages} from "../models/message.ts";
