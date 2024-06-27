@@ -32,10 +32,10 @@ function App() {
                   minH="100vh"
                   flexDirection="column" onClick={isOpen ? closeSlide : undefined}>
                 <Header/>
-                <Box w="100vw" maxW="800px" p={4}>
-                    <PatientCard patient={PatientMauriceDupont}/>
-                </Box>
                 <MessagesProvider>
+                    <Box w="100vw" maxW="800px" p={4}>
+                        <PatientCard patient={PatientMauriceDupont}/>
+                    </Box>
                     <StatePenguin/>
 
                     <Flex flexDirection="column" pb="16">

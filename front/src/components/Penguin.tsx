@@ -1,4 +1,8 @@
-import { Box, Center, Flex } from '@chakra-ui/react';
+import {
+    Box,
+    Center,
+    Flex,
+} from '@chakra-ui/react';
 import PenguinSVG from "../assets/penguins/normal.svg";
 import PenguinDiarrheaSVG from "../assets/penguins/diarrhea.svg";
 import PenguinAlertSVG from "../assets/penguins/alert.svg";
@@ -11,11 +15,9 @@ import PenguinDepressionSVG from "../assets/penguins/depression.svg";
 import PenguinPainSVG from "../assets/penguins/pain.svg";
 import PenguinWaitingForCareSVG from "../assets/penguins/waiting_for_care.svg";
 
+
 import blobSVG from "../assets/blob.svg";
-import {Message} from "./Message.tsx";
 import {PenguinStateByName} from "../models/penguin_state.tsx";
-import {useContext} from "react";
-import {MessageContext} from "./MessagesProvider.tsx";
 
 const Penguin = (
     {
@@ -25,7 +27,6 @@ const Penguin = (
     }
 ) => {
 
-    const messagesAndSummary = useContext(MessageContext);
 
     const getSVG = () => {
         switch (state) {
@@ -71,19 +72,6 @@ const Penguin = (
                         <img src={getSVG()}/>
                     </Box>
                 </Center>
-            </Box>
-            <Box
-                position="absolute"
-                top="0px"
-                left="-45px"
-            >
-                <Message
-                    outlined={true}
-                    message={{
-                        content: messagesAndSummary.summary,
-                        type: "sent",
-                    }}
-                />
             </Box>
         </Flex>
     );

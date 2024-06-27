@@ -8,5 +8,4 @@ export const PatientMauriceDupont: Patient = {
     height: 180,
     weight: 80,
     nationality: "français",
-    pathologiesSummary: "Suite à une glissade d'un iceberg en Antarctique lui ayant causé de multiples fractures et gelures.",
 }

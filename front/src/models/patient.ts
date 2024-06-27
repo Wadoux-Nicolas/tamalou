@@ -6,5 +6,4 @@ export interface Patient {
     height: number;
     weight: number;
     nationality: string;
-    pathologiesSummary: string;
 }

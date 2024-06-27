@@ -30,7 +30,7 @@ export const MessagesProvider = (
     let lastFetch: Date | null = null;
 
     const fetchSummary = () => {
-        let url = 'http://localhost:8000/summary';
+        const url = 'http://localhost:8000/summary';
         setSummary(loadingMessage);
 
         fetch(
@@ -43,8 +43,8 @@ export const MessagesProvider = (
             }
         )
             .then(r => r.json())
-            .then((data) => {
-                setSummary(data);
+            .then(({summary}) => {
+                setSummary(summary);
             })
     };
 
