@@ -1,4 +1,5 @@
-import {Box, Center, Flex} from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
+import { Box, Center, Flex } from '@chakra-ui/react';
 import PenguinSVG from "../assets/penguins/normal.svg";
 import PenguinDiarrheaSVG from "../assets/penguins/diarrhea.svg";
 import PenguinAlertSVG from "../assets/penguins/alert.svg";
