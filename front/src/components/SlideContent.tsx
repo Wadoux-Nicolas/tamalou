@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, Heading, Icon, Text, IconButton } from '@chakra-ui/react';
 import { RxCross2 } from "react-icons/rx";
 

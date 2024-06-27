@@ -8,12 +8,14 @@ export const TextInput = forwardRef((
         handleInputChange,
         size = 'sm',
         resize = undefined,
+        focusBorderColor
     }: {
         value?: string,
         placeholder?: string,
         handleInputChange?: ChangeEventHandler<HTMLTextAreaElement>
         size?: ResponsiveValue<string>
         resize?: 'none' | 'horizontal' | 'vertical' | undefined,
+        focusBorderColor?: string
     },
     ref: ForwardedRef<HTMLTextAreaElement>
 ) => {
@@ -28,6 +30,7 @@ export const TextInput = forwardRef((
                 borderRadius={12}
                 p={4}
                 ref={ref}
+                focusBorderColor={focusBorderColor}
             />
         </>
     )

@@ -1,4 +1,3 @@
-import React from 'react';
 import CustomButton from './CustomButton';
 
 const SlideButton = ({ icon, text, iconColor, bgColor, borderColor, badgeContent, onToggle }) => {

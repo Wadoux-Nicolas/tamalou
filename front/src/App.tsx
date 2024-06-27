@@ -47,7 +47,6 @@ function App() {
                             {
                                 type: 'sent',
                                 content: 'Hello Maurice, how are you today?',
-                                avatarName: 'Maurice DUPONT',
                             },
                             {
                                 avatarIcon: FaHospitalUser,
@@ -57,24 +56,7 @@ function App() {
                             {
                                 type: 'errored',
                                 content: 'No messages to display',
-                            },
-                            {
-                                avatarName: 'Maurice DUPONT',
-                                type: 'sent',
-                                outlined: true,
-                                content: 'Hello Maurice, how are you today?',
-                            },
-                            {
-                                avatarIcon: FaHospitalUser,
-                                type: 'received',
-                                outlined: true,
-                                content: 'Hello, I am fine, thank you',
-                            },
-                            {
-                                type: 'errored',
-                                outlined: true,
-                                content: 'No messages to display',
-                            },
+                            }
                         ]}
                     />
                 </Flex>
