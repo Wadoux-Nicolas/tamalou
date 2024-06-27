@@ -68,15 +68,6 @@ export const Message = (
                     message.content
                 }
             </Box>
-
-            {isSent && hasAvatar &&
-                <Avatar
-                    size='md'
-                    name={message.avatarName}
-                    ml={4}
-                    bgColor={stateColor}
-                />
-            }
         </Box>
     );
 }
