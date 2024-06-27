@@ -1,7 +1,15 @@
 import {
     Box,
     Center,
-    Flex,
+    Flex, IconButton,
+    Popover,
+    PopoverTrigger,
+    PopoverContent,
+    PopoverHeader,
+    PopoverBody,
+    PopoverArrow,
+    PopoverCloseButton,
+    Text
 } from '@chakra-ui/react';
 import PenguinSVG from "../assets/penguins/normal.svg";
 import PenguinDiarrheaSVG from "../assets/penguins/diarrhea.svg";
@@ -18,6 +26,10 @@ import PenguinWaitingForCareSVG from "../assets/penguins/waiting_for_care.svg";
 
 import blobSVG from "../assets/blob.svg";
 import {PenguinStateByName} from "../models/penguin_state.tsx";
+import {IoIosInformationCircleOutline} from "react-icons/io";
+import {useContext, useEffect, useState} from "react";
+import {MessageContext} from "./MessagesProvider.tsx";
+import {Message, MessageProps} from "./Message.tsx";
 
 const Penguin = (
     {
@@ -26,6 +38,22 @@ const Penguin = (
         state?: PenguinStateByName,
     }
 ) => {
+    const [message, setMessage] = useState<MessageProps | null>(null)
+    const context = useContext(MessageContext)
+    useEffect(() => {
+        setMessage(getLastMessageWithState())
+    }, [context.messages]);
+
+    const getLastMessageWithState = () : MessageProps | null => {
+        for (let i = context.messages.length - 1; i >= 0; i--) {
+            const message = context.messages[i];
+
+            if (message.state) {
+                return message;
+            }
+        }
+        return null;
+    }
 
 
     const getSVG = () => {
@@ -72,6 +100,26 @@ const Penguin = (
                         <img src={getSVG()}/>
                     </Box>
                 </Center>
+            </Box>
+            <Box position="absolute"
+            top="0px"
+            right="-45px">
+                <Popover placement="left">
+                    <PopoverTrigger>
+                        <IconButton  variant='outline'
+                                     icon={<IoIosInformationCircleOutline />}></IconButton>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                        <PopoverArrow />
+                        <PopoverCloseButton />
+                        <PopoverHeader>Confirmation!</PopoverHeader>
+                        <PopoverBody>
+                            {message && <Message outlined={true} message={message}/>}
+                            {!message && <Text>Chargement en cours...</Text>}
+                        </PopoverBody>
+                    </PopoverContent>
+                </Popover>
+
             </Box>
         </Flex>
     );
