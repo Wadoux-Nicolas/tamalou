@@ -1,5 +1,5 @@
 import {Box, Center, Flex} from '@chakra-ui/react';
-import PenguinSVG from "../assets/normal.svg";
+import PenguinSVG from "../assets/penguins/normal.svg";
 import blobSVG from "../assets/blob.svg";
 import {Message} from "./Message.tsx";
 
