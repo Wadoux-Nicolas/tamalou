@@ -28,8 +28,9 @@ function App() {
 
     return (
         <>
-            <Flex backgroundColor={"background"} align="center" justifyContent="flex-start" gap="4" h="100%" minH="100vh"
-                  flexDirection="column">
+            <Flex backgroundColor={"background"} align="center" justifyContent="flex-start" gap="4" h="100%"
+                  minH="100vh"
+                  flexDirection="column" onClick={isOpen && closeSlide}>
                 <Header/>
                 <Box w="100vw" maxW="800px" p={4}>
                     <PatientCard patient={PatientMauriceDupont}/>
@@ -39,17 +40,19 @@ function App() {
 
                     <Flex flexDirection="column" pb="16">
                         <GroupInformationButtons handleButtonClick={handleButtonClick}/>
-                        <Slide direction="bottom" in={isOpen} style={{zIndex: 10}}>
-                            <SlideContent content={content} closeSlide={closeSlide}/>
-                        </Slide>
                     </Flex>
 
-                    <Flex alignSelf="flex-end" flexDirection="column" p="4" gap="2" position="fixed" bottom="0" right="0">
+                    <Flex alignSelf="flex-end" flexDirection="column" p="4" gap="2" position="fixed" bottom="0"
+                          right="0">
                         <CustomButton icon={FaPhone} iconColor="white" bgColor="alert"/>
                         <MessagesContextContainer/>
                     </Flex>
                 </MessagesProvider>
             </Flex>
+
+            <Slide direction="bottom" in={isOpen} style={{zIndex: 10}}>
+                <SlideContent content={content} closeSlide={closeSlide}/>
+            </Slide>
         </>
     );
 }
