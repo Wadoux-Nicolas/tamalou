@@ -12,7 +12,6 @@ import PenguinPainSVG from "../assets/penguins/pain.svg";
 import PenguinWaitingForCareSVG from "../assets/penguins/waiting_for_care.svg";
 
 import blobSVG from "../assets/blob.svg";
-import {Message} from "./Message.tsx";
 import {PenguinStateByName} from "../models/penguin_state.tsx";
 
 const Penguin = (
@@ -73,13 +72,7 @@ const Penguin = (
                 top="0px"
                 left="-45px"
             >
-                <Message
-                    outlined={true}
-                    message={{
-                        content: "Salut !",
-                        type: "sent",
-                    }}
-                />
+
             </Box>
         </Flex>
     );
