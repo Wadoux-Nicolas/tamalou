@@ -22,6 +22,7 @@ function Menu() {
                 onClick={onOpen}
                 ref={btnRef}
                 icon={IoIosMenu}
+                iconSize={24}
             />
             <Drawer
                 isOpen={isOpen}

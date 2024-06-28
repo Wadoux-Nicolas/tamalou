@@ -30,7 +30,7 @@ function App() {
         <>
             <Flex backgroundColor={"background"} align="center" justifyContent="flex-start" gap="4" h="100%"
                   minH="100vh"
-                  flexDirection="column" onClick={isOpen ? closeSlide : undefined}>
+                  flexDirection="column">
                 <Header/>
                 <MessagesProvider>
                     <Box w="100vw" maxW="800px" px={4}>

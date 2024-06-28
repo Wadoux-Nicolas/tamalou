@@ -1,0 +1,8 @@
+services:
+  back:
+    build: back
+    network_mode: host
+  front:
+    build: front
+    ports:
+      - "80:80"

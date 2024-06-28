@@ -7,6 +7,7 @@ const CustomButton = forwardRef((
         icon,
         text,
         iconColor,
+        iconSize = "16px",
         bgColor,
         borderColor = "transparent",
         badgeContent,
@@ -17,6 +18,7 @@ const CustomButton = forwardRef((
         icon: IconType,
         text?: string,
         iconColor?: string,
+        iconSize?: string | number,
         bgColor?: string,
         borderColor?: string,
         badgeContent?: string|number,
@@ -41,7 +43,7 @@ const CustomButton = forwardRef((
                 width={width}
                 height={height}
             >
-                {badgeContent !== undefined && badgeContent > 0 && (
+                {!!badgeContent && (
                     <Badge
                         position="absolute"
                         top="-5px"
@@ -59,7 +61,7 @@ const CustomButton = forwardRef((
                         {badgeContent}
                     </Badge>
                 )}
-                <Icon as={icon} color={iconColor} />
+                <Icon as={icon} color={iconColor} fontSize={iconSize}/>
             </Box>
             {text && <Text fontSize="0.8rem" mt={"2"} textAlign="center">{text}</Text>}
         </Box>
