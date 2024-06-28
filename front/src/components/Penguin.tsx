@@ -24,7 +24,7 @@ import {PenguinStateByName} from "../models/penguin_state.tsx";
 import {IoInformation} from "react-icons/io5";
 import {useContext, useEffect, useState} from "react";
 import {MessageContext} from "./MessagesProvider.tsx";
-import {Message, MessageProps} from "./Message.tsx";
+import {MessageProps} from "./Message.tsx";
 
 const Penguin = (
     {
@@ -121,7 +121,7 @@ const Penguin = (
                     <Center mx="auto" my={3}>
                       <Divider width={"120px"} borderColor="grey" />
                     </Center>
-                      {message.content}
+                      "{message.content}"
                   </Box>
                 </Collapse>
               </Box>

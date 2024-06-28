@@ -18,7 +18,7 @@ export const parseMessage = (message: MessageJson): MessageProps => {
         type: message.role === 'hopital' ? 'received' : 'sent',
         content: message.content,
         avatarIcon: message.role === 'hopital' ? FaHospitalUser : undefined,
-        date: new Date(message.date),
+        date: new Date(message.date + 'Z'),
         state: message.category ? getStateFromString(message.category.label) : undefined,
     };
 }

@@ -25,13 +25,13 @@ export const Messages = (
     const [sendingFailed, setSendingFailed] = useState(false)
     const [sending, setSending] = useState(false)
     const bodyRef = useRef<HTMLDivElement>(null);
-    const [notFetchedMessages, setNotFetchedMessages] = useState<MessagesPropsConfig[]>([]);
+    const [allMessages, setAllMessages] = useState<MessagesPropsConfig[]>([]);
 
     useEffect(() => {
         if (bodyRef.current) {
             bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
         }
-        setNotFetchedMessages([]);
+        setAllMessages(messages);
     }, [messages]);
 
     const submitMessage = () => {
@@ -52,10 +52,15 @@ export const Messages = (
                 should_be_analyzed: true
             }),
         })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to send message')
+                }
+                return response.json()
+            })
             .then((message) => {
                 setNewMessage('')
-                setNotFetchedMessages((prevMessages) => {
+                setAllMessages((prevMessages) => {
                     return [...prevMessages, parseMessage(message)]
                 })
             })
@@ -89,7 +94,7 @@ export const Messages = (
                     <ModalCloseButton/>
                     <ModalBody ref={bodyRef}>
                         {
-                            [...messages, ...notFetchedMessages].map((message, index) => (
+                            allMessages.map((message, index) => (
                                 <Message
                                     key={index}
                                     message={message}
@@ -109,7 +114,7 @@ export const Messages = (
                             ))
                         }
 
-                        {messages.length === 0 && notFetchedMessages.length === 0 &&
+                        {allMessages.length === 0 &&
                             <Text>Aucun message à afficher</Text>
                         }
 
