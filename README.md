@@ -1,5 +1,4 @@
-<img src="./front/src/assets/logo.png" alt="MemoHelp" width="200"/>
-<img src="./front/src/assets/penguins/normal.svg" alt="MemoHelp" width="50"/>
+<img src="./front/src/assets/logo-green.png" alt="MemoHelp" width="200"/>
 
 ---
 
