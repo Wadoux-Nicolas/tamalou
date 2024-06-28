@@ -69,6 +69,7 @@ class Notification(BaseModel):
 
 @app.get("/notifications")
 def get_notifications() -> dict[str, Notification]:
+    # this must be generated using the decision tree of memoquest to tell patient what to do to maintain his health
     return {
         "bandage": Notification(
             amount=random.randint(0, 2),
