@@ -41,7 +41,7 @@ const CustomButton = forwardRef((
                 width={width}
                 height={height}
             >
-                {badgeContent !== undefined && badgeContent > 0 && (
+                {!!badgeContent && (
                     <Badge
                         position="absolute"
                         top="-5px"
