@@ -31,7 +31,6 @@ export const MessagesProvider = (
 
     const fetchSummary = () => {
         const url = 'http://localhost:8000/summary';
-        setSummary(loadingMessage);
 
         fetch(
             url,
@@ -65,12 +64,17 @@ export const MessagesProvider = (
         )
             .then(r => r.json())
             .then((data) => {
+
                 if (!data || data.length <= 0) {
+                    if (!lastFetch) {
+                        fetchSummary()
+                    }
+                    lastFetch = new Date();
                     return;
                 }
-
-                setMessages((prevMessages) => [...prevMessages, ...parseMessages(data)]);
+                
                 lastFetch = new Date();
+                setMessages((prevMessages) => [...prevMessages, ...parseMessages(data)]);
                 fetchSummary()
             })
             .finally(() => {
