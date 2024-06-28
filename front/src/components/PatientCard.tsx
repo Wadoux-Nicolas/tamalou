@@ -28,7 +28,7 @@ const PatientCard = (
                         bgColor={"green.main"}
                         icon={FaStethoscope}
                     />
-                    <Text pt='2' fontSize='xs'>
+                    <Text fontSize='xs'>
                         {patient.pathologiesSummary}
                     </Text>
                 </Flex>

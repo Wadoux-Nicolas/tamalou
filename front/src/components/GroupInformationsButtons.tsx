@@ -43,7 +43,9 @@ const GroupInformationButtons = ({ handleButtonClick }: Props) => {
                         text="Pansements"
                         badgeContent={notifs.getCount("bandage")}
                         borderColor={"green.main"}
-                        onToggle={() => handleButtonClick(FaBandAid, 'Pansements', notifs.getDescription("bandage"))}
+                        onToggle={() => notifs.getCount("bandage") ?
+                            handleButtonClick(FaBandAid, 'Pansements', notifs.getDescription("bandage")): undefined
+                        }
                     />
                     <SlideButton
                         bgColor={"white"}
@@ -51,7 +53,9 @@ const GroupInformationButtons = ({ handleButtonClick }: Props) => {
                         text="Médicaments"
                         badgeContent={notifs.getCount("medication")}
                         borderColor={"green.main"}
-                        onToggle={() => handleButtonClick(FaPills, 'Médicaments', notifs.getDescription("medication"))}
+                        onToggle={() => notifs.getCount("medication") ?
+                            handleButtonClick(FaPills, 'Médicaments', notifs.getDescription("medication")): undefined
+                        }
                     />
                     <SlideButton
                         bgColor={"white"}
@@ -59,7 +63,9 @@ const GroupInformationButtons = ({ handleButtonClick }: Props) => {
                         text="Repas"
                         badgeContent={notifs.getCount("meals")}
                         borderColor={"green.main"}
-                        onToggle={() => handleButtonClick(FaUtensils, 'Repas', notifs.getDescription("meals"))}
+                        onToggle={() => notifs.getCount("meals") ?
+                            handleButtonClick(FaUtensils, 'Repas', notifs.getDescription("meals")): undefined
+                        }
                     />
                 </Flex>
             </Flex>
@@ -71,7 +77,9 @@ const GroupInformationButtons = ({ handleButtonClick }: Props) => {
                         text="Exercice"
                         badgeContent={notifs.getCount("exercise")}
                         borderColor={"green.main"}
-                        onToggle={() => handleButtonClick(FaDumbbell, 'Exercice', notifs.getDescription("exercise"))}
+                        onToggle={() => notifs.getCount("exercise") ?
+                            handleButtonClick(FaDumbbell, 'Exercice', notifs.getDescription("exercise")): undefined
+                        }
                     />
                     <SlideButton
                         bgColor={"white"}
@@ -79,7 +87,9 @@ const GroupInformationButtons = ({ handleButtonClick }: Props) => {
                         text="Repos"
                         badgeContent={notifs.getCount("rest")}
                         borderColor={"green.main"}
-                        onToggle={() => handleButtonClick(FaMoon, 'Repos', notifs.getDescription("rest"))}
+                        onToggle={() => notifs.getCount("rest") ?
+                            handleButtonClick(FaMoon, 'Repos', notifs.getDescription("rest")): undefined
+                        }
                     />
                 </Flex>
             </Flex>

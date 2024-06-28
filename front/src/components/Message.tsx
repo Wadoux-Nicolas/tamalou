@@ -44,30 +44,47 @@ export const Message = (
             }
 
             <Box
-                p={p}
-                border={border}
-                borderColor={stateColor}
-                borderRadius={borderRadius}
-                bgColor={outlined ? 'white' : stateColor}
-                {...otherBoxProps}
+                display="flex"
+                flexDirection="column"
+                w='100%'
             >
-                {isErrored &&
-                    <Alert
-                        p="0"
-                        status='error'
-                        bgColor={outlined ? 'white' : 'alert'}
-                        color={outlined ? 'alert' : 'white'}
-                    >
-                        <AlertIcon
+                <Box
+                    p={p}
+                    border={border}
+                    borderColor={stateColor}
+                    borderRadius={borderRadius}
+                    bgColor={outlined ? 'white' : stateColor}
+                    {...otherBoxProps}
+                >
+                    {isErrored &&
+                        <Alert
+                            p="0"
+                            status='error'
+                            bgColor={outlined ? 'white' : 'alert'}
                             color={outlined ? 'alert' : 'white'}
-                        />
-                        {message.content}
-                    </Alert>
+                        >
+                            <AlertIcon
+                                color={outlined ? 'alert' : 'white'}
+                            />
+                            {message.content}
+                        </Alert>
+                    }
+
+                    {!isErrored &&
+                        message.content
+                    }
+                </Box>
+
+                {message.date &&
+                    <Box
+                        alignSelf={isSent ? 'flex-end' : 'flex-start'}
+                        color='gray.500'
+                        fontSize={10}
+                    >
+                        {message.date.toLocaleTimeString().split(':').slice(0, 2).join(':')}
+                    </Box>
                 }
 
-                {!isErrored &&
-                    message.content
-                }
             </Box>
         </Box>
     );
